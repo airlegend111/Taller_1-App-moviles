@@ -1,0 +1,944 @@
+/* =====================================================
+   PALETA DE COLORES DEL RETO "BASIC"
+   ===================================================== */
+:root {
+    --color-accent: #f9cdcd;      /* Rosa suave */
+    --color-dark: #252422;        /* Gris oscuro (casi negro) */
+    --color-light: #f4f4f4;       /* Gris claro */
+    --color-white: #ffffff;
+    
+    /* Espaciado y tipografía */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --spacing-xxl: 4rem;
+    
+    /* Tipografía */
+    --font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+    --font-weight-black: 900;
+}
+
+/* =====================================================
+   RESET Y ESTILOS GLOBALES
+   ===================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--color-white);
+    color: var(--color-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: var(--font-family);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* =====================================================
+   HEADER FIJO - Cambia de estilo al hacer scroll
+   [RETO: Scroll event]
+   ===================================================== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: var(--spacing-lg);
+    background: transparent;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.header.scrolled {
+    background: rgba(255, 255, 255, 0.98);
+    border-bottom: 1px solid var(--color-light);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-black);
+    letter-spacing: 0.1em;
+    color: var(--color-dark);
+}
+
+.nav {
+    display: flex;
+    gap: var(--spacing-xl);
+}
+
+.nav-link {
+    font-size: 0.95rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-dark);
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+/* RETO: Hover effect en enlaces */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-accent);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--color-accent);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.btn-talk {
+    background-color: var(--color-dark);
+    color: var(--color-white);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: 0;
+    font-weight: var(--font-weight-bold);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    
+    /* RETO: Hover effect en botones */
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-talk::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-accent);
+    z-index: -1;
+    transition: left 0.3s ease;
+}
+
+.btn-talk:hover::before {
+    left: 0;
+}
+
+.btn-talk:hover {
+    color: var(--color-dark);
+}
+
+/* =====================================================
+   HERO SECTION - 100vh
+   [RETO: Scroll event - aparición suave]
+   ===================================================== */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-top: 60px;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--color-light) 0%, #f9f9f9 100%);
+    z-index: -1;
+    /* COMENTARIO: Aquí va el background image o video en production */
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 800px;
+    padding: var(--spacing-xl);
+    animation: fadeInUp 1s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: var(--font-weight-black);
+    line-height: 1.2;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-dark);
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    font-weight: var(--font-weight-light);
+    color: #666;
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.8;
+}
+
+.hero-cta {
+    display: flex;
+    gap: var(--spacing-lg);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Botón Primario */
+.btn-primary {
+    background-color: var(--color-dark);
+    color: var(--color-white);
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: 0;
+    font-weight: var(--font-weight-bold);
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    
+    /* RETO: Hover effect */
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s ease, height 0.5s ease;
+}
+
+.btn-primary:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-primary:hover {
+    color: var(--color-dark);
+}
+
+/* Botón Secundario */
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-dark);
+    padding: var(--spacing-md) var(--spacing-xl);
+    border: 2px solid var(--color-dark);
+    border-radius: 0;
+    font-weight: var(--font-weight-bold);
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    
+    /* RETO: Hover effect */
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-secondary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-accent);
+    transition: left 0.3s ease;
+}
+
+.btn-secondary:hover::before {
+    left: 0;
+}
+
+.btn-secondary:hover {
+    border-color: var(--color-accent);
+    color: var(--color-dark);
+}
+
+/* =====================================================
+   BRANDS / CLIENTES SECTION
+   [RETO: Scroll event - aparición suave]
+   ===================================================== */
+.brands-section {
+    padding: var(--spacing-xxl) var(--spacing-xl);
+    background-color: var(--color-white);
+    border-top: 1px solid var(--color-light);
+    border-bottom: 1px solid var(--color-light);
+    animation: scrollFadeIn 1s ease forwards;
+    opacity: 0;
+}
+
+@keyframes scrollFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.brands-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.brands-title {
+    font-size: 0.9rem;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: var(--spacing-lg);
+}
+
+.brands-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-xxl);
+}
+
+.brand-name {
+    font-size: 1.1rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-dark);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.brand-name:hover {
+    opacity: 1;
+    color: var(--color-accent);
+    transform: scale(1.05);
+}
+
+/* =====================================================
+   FEATURED ENGAGEMENTS - SLIDER DRAGGABLE
+   [RETO: Draggable elements + Hover effects]
+   ===================================================== */
+.featured-section {
+    padding: var(--spacing-xxl) var(--spacing-xl);
+    background-color: var(--color-light);
+}
+
+.featured-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.featured-header {
+    margin-bottom: var(--spacing-xxl);
+    animation: scrollFadeIn 1s ease;
+}
+
+.section-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: var(--font-weight-black);
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-dark);
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    font-weight: var(--font-weight-light);
+    color: #666;
+    max-width: 600px;
+}
+
+/* Slider wrapper */
+.featured-slider-wrapper {
+    width: 100%;
+    overflow: hidden;
+    cursor: grab;
+}
+
+.featured-slider-wrapper:active {
+    cursor: grabbing;
+}
+
+/* RETO: Slider draggable horizontal */
+.featured-slider {
+    display: flex;
+    gap: var(--spacing-xl);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: var(--spacing-md) 0;
+    
+    /* Esconder scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.featured-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.project-card {
+    flex: 0 0 clamp(300px, 40vw, 450px);
+    background-color: var(--color-white);
+    border-radius: 0;
+    overflow: hidden;
+    scroll-snap-align: start;
+    
+    /* RETO: Hover effects en tarjetas */
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.project-image {
+    width: 100%;
+    height: 250px;
+    background-color: var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.placeholder-image {
+    font-size: 1.2rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    /* COMENTARIO: Reemplaza esto con <img> o <video> tag */
+}
+
+.project-card:hover .project-image {
+    background-color: #f0b8b8;
+    transform: scale(1.02);
+}
+
+.project-info {
+    padding: var(--spacing-lg);
+}
+
+.project-name {
+    font-size: 1.3rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin-bottom: var(--spacing-sm);
+}
+
+.project-client {
+    font-size: 0.9rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-xs);
+}
+
+.project-category {
+    font-size: 0.85rem;
+    font-weight: var(--font-weight-medium);
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--spacing-md);
+}
+
+.project-description {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* =====================================================
+   ABOUT SECTION
+   [RETO: Scroll event - aparición suave]
+   ===================================================== */
+.about-section {
+    padding: var(--spacing-xxl) var(--spacing-xl);
+    background-color: var(--color-white);
+    animation: scrollFadeIn 1s ease;
+}
+
+.about-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xxl);
+    margin-top: var(--spacing-xxl);
+    align-items: start;
+}
+
+.about-text p {
+    font-size: 1.1rem;
+    font-weight: var(--font-weight-light);
+    color: #555;
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.8;
+}
+
+.about-values {
+    display: grid;
+    gap: var(--spacing-xl);
+}
+
+.value-item {
+    padding: var(--spacing-lg);
+    background-color: var(--color-light);
+    border-left: 4px solid var(--color-accent);
+    
+    /* RETO: Hover effect */
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.value-item:hover {
+    background-color: #f0f0f0;
+    transform: translateX(5px);
+}
+
+.value-item h3 {
+    font-size: 1.1rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin-bottom: var(--spacing-sm);
+}
+
+.value-item p {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 0;
+}
+
+/* =====================================================
+   SERVICES SECTION
+   [RETO: Hover effects en tarjetas]
+   ===================================================== */
+.services-section {
+    padding: var(--spacing-xxl) var(--spacing-xl);
+    background-color: var(--color-light);
+    animation: scrollFadeIn 1s ease;
+}
+
+.services-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xxl);
+}
+
+.service-card {
+    background-color: var(--color-white);
+    padding: var(--spacing-xl);
+    border-radius: 0;
+    
+    /* RETO: Hover effects */
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 4px;
+    background-color: var(--color-accent);
+    transition: left 0.3s ease;
+}
+
+.service-card:hover::before {
+    left: 0;
+}
+
+.service-card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.service-card h3 {
+    font-size: 1.3rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin-bottom: var(--spacing-md);
+}
+
+.service-card p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.7;
+}
+
+/* =====================================================
+   JOURNAL / NEWS SECTION
+   [RETO: Scroll event + Hover effects]
+   ===================================================== */
+.journal-section {
+    padding: var(--spacing-xxl) var(--spacing-xl);
+    background-color: var(--color-white);
+    animation: scrollFadeIn 1s ease;
+}
+
+.journal-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.journal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xxl);
+}
+
+.journal-card {
+    background-color: var(--color-white);
+    border-radius: 0;
+    overflow: hidden;
+    
+    /* RETO: Hover effects en tarjetas */
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid var(--color-light);
+}
+
+.journal-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-accent);
+}
+
+.journal-image {
+    width: 100%;
+    height: 200px;
+    background-color: var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.journal-card:hover .journal-image {
+    transform: scale(1.05);
+}
+
+.journal-info {
+    padding: var(--spacing-lg);
+}
+
+.journal-category {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-sm);
+}
+
+.journal-card h3 {
+    font-size: 1.2rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.4;
+}
+
+.journal-date {
+    font-size: 0.85rem;
+    color: #999;
+    margin: 0;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+.footer {
+    background-color: var(--color-dark);
+    color: var(--color-white);
+    padding: var(--spacing-xxl) var(--spacing-xl) var(--spacing-lg);
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+.footer-section h3,
+.footer-section h4 {
+    font-size: 1rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-md);
+    letter-spacing: 0.05em;
+}
+
+.footer-section p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    opacity: 0.8;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section li {
+    margin-bottom: var(--spacing-sm);
+}
+
+.footer-section a {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+/* RETO: Hover effects en enlaces del footer */
+.footer-section a:hover {
+    color: var(--color-accent);
+    opacity: 1;
+}
+
+.footer-bottom {
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* =====================================================
+   RESPONSIVE DESIGN
+   ===================================================== */
+
+/* Tablet - 768px and below */
+@media (max-width: 768px) {
+    .nav {
+        gap: var(--spacing-md);
+    }
+
+    .nav-link {
+        font-size: 0.85rem;
+    }
+
+    .btn-talk {
+        padding: var(--spacing-xs) var(--spacing-md);
+        font-size: 0.8rem;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .hero-cta {
+        gap: var(--spacing-md);
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        padding: var(--spacing-md) var(--spacing-lg);
+        font-size: 0.9rem;
+    }
+
+    .brands-list {
+        gap: var(--spacing-lg);
+    }
+
+    .brand-name {
+        font-size: 0.95rem;
+    }
+
+    .project-card {
+        flex: 0 0 clamp(280px, 70vw, 400px);
+    }
+
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .journal-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .featured-section,
+    .about-section,
+    .services-section,
+    .journal-section {
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+}
+
+/* Mobile - 480px and below */
+@media (max-width: 480px) {
+    :root {
+        --spacing-lg: 1.5rem;
+        --spacing-xl: 2rem;
+    }
+
+    .header-container {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .nav {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        width: 100%;
+    }
+
+    .nav-link {
+        font-size: 0.8rem;
+    }
+
+    .btn-talk {
+        width: 100%;
+    }
+
+    .hero {
+        margin-top: 120px;
+        align-items: flex-start;
+        padding-top: var(--spacing-xl);
+    }
+
+    .hero-title {
+        font-size: 1.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+    }
+
+    .brands-list {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .featured-slider {
+        gap: var(--spacing-md);
+    }
+
+    .project-card {
+        flex: 0 0 90vw;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =====================================================
+   ANIMACIONES Y EFECTOS DE SCROLL
+   Nota: Las animaciones se activan con JavaScript
+   ===================================================== */
+
+/* Efecto de aparición suave al hacer scroll */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-animate.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}

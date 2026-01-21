@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS - Agencia Digital de Branding y Diseño</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts: Roboto para un diseño moderno y limpio -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ============================================
+         HEADER FIJO - Cambia de estilo al hacer scroll
+         ============================================ -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <!-- Logo de texto -->
+            <div class="logo">NEXUS</div>
+            
+            <!-- Navegación -->
+            <nav class="nav">
+                <a href="#work" class="nav-link">Work</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#journal" class="nav-link">Journal</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+            
+            <!-- Botón CTA -->
+            <button class="btn-talk">Let's Talk</button>
+        </div>
+    </header>
+
+    <!-- ============================================
+         HERO SECTION - 100vh
+         [REEMPLAZA: Agrega imagen o video de fondo en media/ folder]
+         ============================================ -->
+    <section class="hero" id="hero">
+        <!-- Contenedor para imagen/video de fondo -->
+        <div class="hero-background">
+            <!-- COMENTARIO: Aquí irá tu imagen o video de fondo. Puedes usar un <img> o <video> -->
+        </div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">
+                Branding Digital<br>Que Inspira
+            </h1>
+            <p class="hero-subtitle">
+                Creamos productos digitales, experiencias de e‑commerce y estrategias de marca que generan valor real a tu negocio.
+            </p>
+            <div class="hero-cta">
+                <button class="btn-primary">Descubre Nuestro Trabajo</button>
+                <button class="btn-secondary">Ver Servicios</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FRANJA DE MARCAS / CLIENTES
+         [RETO: Scroll event - aparición suave]
+         ============================================ -->
+    <section class="brands-section">
+        <div class="brands-container">
+            <h2 class="brands-title">Trabajamos con</h2>
+            <div class="brands-list">
+                <span class="brand-name">Google</span>
+                <span class="brand-name">Airbnb</span>
+                <span class="brand-name">Patagonia</span>
+                <span class="brand-name">Apple</span>
+                <span class="brand-name">Beats</span>
+                <span class="brand-name">Netflix</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FEATURED ENGAGEMENTS - SLIDER DRAGGABLE
+         [RETO: Draggable elements + Hover effects]
+         ============================================ -->
+    <section class="featured-section" id="work">
+        <div class="featured-container">
+            <div class="featured-header">
+                <h2 class="section-title">Proyectos Destacados</h2>
+                <p class="section-subtitle">Selección de nuestros trabajos más recientes en branding, diseño digital y desarrollo de productos.</p>
+            </div>
+            
+            <!-- Slider draggable -->
+            <div class="featured-slider-wrapper">
+                <div class="featured-slider" id="featuredSlider">
+                    <!-- COMENTARIO: Estas tarjetas son arrastrables. CSS Scroll Snap está configurado. -->
+                    
+                    <div class="project-card">
+                        <div class="project-image">
+                            <!-- REEMPLAZA: Agrega tu imagen de proyecto aquí -->
+                            <div class="placeholder-image">Proyecto 1</div>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-name">Identidad Visual Moderna</h3>
+                            <p class="project-client">Cliente: TechStart Co.</p>
+                            <p class="project-category">Branding & Design</p>
+                            <p class="project-description">Rediseño completo de identidad visual con enfoque en modernidad y accesibilidad.</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">
+                            <!-- REEMPLAZA: Agrega tu imagen de proyecto aquí -->
+                            <div class="placeholder-image">Proyecto 2</div>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-name">E‑Commerce Digital</h3>
+                            <p class="project-client">Cliente: RetailHub</p>
+                            <p class="project-category">Digital Product</p>
+                            <p class="project-description">Plataforma de comercio electrónico con experiencia de usuario optimizada.</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">
+                            <!-- REEMPLAZA: Agrega tu imagen de proyecto aquí -->
+                            <div class="placeholder-image">Proyecto 3</div>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-name">Estrategia de Marca Global</h3>
+                            <p class="project-client">Cliente: Global Ventures</p>
+                            <p class="project-category">Brand Strategy</p>
+                            <p class="project-description">Posicionamiento de marca y estrategia de comunicación para expansión internacional.</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">
+                            <!-- REEMPLAZA: Agrega tu imagen de proyecto aquí -->
+                            <div class="placeholder-image">Proyecto 4</div>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-name">Aplicación Móvil SaaS</h3>
+                            <p class="project-client">Cliente: CloudForce</p>
+                            <p class="project-category">Digital Experience</p>
+                            <p class="project-description">Diseño e implementación de aplicación SaaS con interfaz intuitiva y escalable.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         ABOUT SECTION
+         [RETO: Scroll event - aparición suave]
+         ============================================ -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <h2 class="section-title">Quiénes Somos</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        En NEXUS, creemos que el diseño digital es más que estética. Es la convergencia de cultura, tecnología y estrategia de negocio. Nuestro equipo está compuesto por diseñadores, desarrolladores y estrategas apasionados por resolver problemas complejos mediante soluciones creativas e innovadoras.
+                    </p>
+                    <p>
+                        Desde la conceptualización de marca hasta la implementación de productos digitales, nos comprometemos a entregar experiencias que no solo se ven bien, sino que generan valor tangible para tus usuarios y tu negocio. Cada proyecto es una oportunidad para explorar nuevas posibilidades y establecer estándares de excelencia.
+                    </p>
+                </div>
+                <div class="about-values">
+                    <div class="value-item">
+                        <h3>Creatividad</h3>
+                        <p>Exploramos límites del diseño para encontrar soluciones únicas.</p>
+                    </div>
+                    <div class="value-item">
+                        <h3>Tecnología</h3>
+                        <p>Utilizamos herramientas y metodologías de vanguardia.</p>
+                    </div>
+                    <div class="value-item">
+                        <h3>Impacto</h3>
+                        <p>Cada trabajo trasciende y genera resultados medibles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SERVICES SECTION
+         [RETO: Hover effects en tarjetas]
+         ============================================ -->
+    <section class="services-section" id="services">
+        <div class="services-container">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Estrategia de Marca</h3>
+                    <p>Definición de posicionamiento, arquitectura de marca y narrativas que resuenan con tu audiencia.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Identidad Visual</h3>
+                    <p>Diseño de logotipos, paletas de color, tipografía y sistemas de diseño coherentes.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Productos Digitales</h3>
+                    <p>Desarrollo de aplicaciones web y móvil con enfoque en UX/UI y escalabilidad.</p>
+                </div>
+                <div class="service-card">
+                    <h3>E‑commerce</h3>
+                    <p>Plataformas de venta online optimizadas para conversión y experiencia del usuario.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Diseño de Experiencia</h3>
+                    <p>Investigación, prototipado y validación de interfaces para máximo impacto.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Consultoría Digital</h3>
+                    <p>Asesoramiento en transformación digital y optimización de procesos creativos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         JOURNAL / NEWS SECTION
+         [RETO: Scroll event + Hover effects en tarjetas]
+         ============================================ -->
+    <section class="journal-section" id="journal">
+        <div class="journal-container">
+            <h2 class="section-title">Artículos y Tendencias</h2>
+            <div class="journal-grid">
+                <article class="journal-card">
+                    <div class="journal-image">
+                        <!-- REEMPLAZA: Agrega tu imagen de artículo aquí -->
+                        <div class="placeholder-image">Artículo 1</div>
+                    </div>
+                    <div class="journal-info">
+                        <span class="journal-category">Tendencias</span>
+                        <h3>El Futuro del Diseño Generativo</h3>
+                        <p class="journal-date">21 de enero, 2026</p>
+                    </div>
+                </article>
+
+                <article class="journal-card">
+                    <div class="journal-image">
+                        <!-- REEMPLAZA: Agrega tu imagen de artículo aquí -->
+                        <div class="placeholder-image">Artículo 2</div>
+                    </div>
+                    <div class="journal-info">
+                        <span class="journal-category">Insights</span>
+                        <h3>Estrategia Omnichannel en 2026</h3>
+                        <p class="journal-date">18 de enero, 2026</p>
+                    </div>
+                </article>
+
+                <article class="journal-card">
+                    <div class="journal-image">
+                        <!-- REEMPLAZA: Agrega tu imagen de artículo aquí -->
+                        <div class="placeholder-image">Artículo 3</div>
+                    </div>
+                    <div class="journal-info">
+                        <span class="journal-category">Casos de Estudio</span>
+                        <h3>Rediseño de Identidad: Lecciones Aprendidas</h3>
+                        <p class="journal-date">15 de enero, 2026</p>
+                    </div>
+                </article>
+
+                <article class="journal-card">
+                    <div class="journal-image">
+                        <!-- REEMPLAZA: Agrega tu imagen de artículo aquí -->
+                        <div class="placeholder-image">Artículo 4</div>
+                    </div>
+                    <div class="journal-info">
+                        <span class="journal-category">Desarrollo</span>
+                        <h3>Accesibilidad Web: Más Allá del Cumplimiento</h3>
+                        <p class="journal-date">12 de enero, 2026</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer" id="contact">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>NEXUS</h3>
+                    <p>Agencia digital especializada en branding, diseño y productos digitales de alto impacto.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Navegación</h4>
+                    <ul>
+                        <li><a href="#work">Proyectos</a></li>
+                        <li><a href="#about">Sobre Nosotros</a></li>
+                        <li><a href="#services">Servicios</a></li>
+                        <li><a href="#journal">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>Email: <a href="mailto:hello@nexus.com">hello@nexus.com</a></p>
+                    <p>Teléfono: <a href="tel:+123456789">+1 (234) 567-89</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Redes Sociales</h4>
+                    <ul>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Dribbble</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 NEXUS. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript para interactividad -->
+    <script src="main.js"></script>
+</body>
+</html>
