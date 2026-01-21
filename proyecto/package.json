@@ -1,0 +1,24 @@
+{
+  "name": "taller_1-app-moviles",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/airlegend111/Taller_1-App-moviles.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/airlegend111/Taller_1-App-moviles/issues"
+  },
+  "homepage": "https://github.com/airlegend111/Taller_1-App-moviles#readme",
+  "dependencies": {
+    "locomotive-scroll": "^5.0.1"
+  }
+}
