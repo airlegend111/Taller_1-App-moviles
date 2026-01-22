@@ -5,6 +5,6 @@ body{margin:0;color:#0f1724;background:linear-gradient(#f8fafc,#eef2ff)}
 .nav-link{padding:8px 12px;border-radius:6px;color:#0f1724;text-decoration:none}
 .nav-link.active{background:#1e3a8a;color:#fff}
 .wrap{max-width:960px;margin:22px auto;padding:0 12px}
-.section{padding:60px 12px;border-radius:8px;background:rgba(255,255,255,0.6);margin-bottom:18px;box-shadow:0 6px 16px rgba(30,58,138,0.06)}
+.section{padding:60px 12px;border-radius:8px;background:rgba(255,255,255,0.6);margin-bottom:18px;box-shadow:0 6px 16px rgba(30,58,138,0.06);min-height:70vh}
 .section h2{margin-top:0}
 @media (max-width:540px){.nav{overflow:auto;padding:8px}}
