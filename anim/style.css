@@ -1,0 +1,129 @@
+/* ==========================
+   anim/style.css
+   Organizado y comentado
+   - Variables
+   - Base / layout
+   - Controles
+   - Escena (paisaje) y objetos
+   - Responsive
+   ========================== */
+
+/* ---------- Variables principales ---------- */
+:root {
+  --bg: #e6f6fb;
+  --text: #09303b;
+  --control-border: #1b3a4a;
+  --scene-bg: #00BFFF;
+  --max-width: 960px;
+  --paisaje-w: 800px;
+  --paisaje-h: 500px;
+  --obj-width-small: 80px;
+  --obj-width-med: 90px;
+}
+
+/* ---------- Base / layout ---------- */
+* {
+  box-sizing: border-box;
+  font-family: Segoe UI, Roboto, Arial, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  margin: 0;
+  padding: 18px;
+  color: var(--text);
+}
+
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 20px;
+  margin: 0 0 12px;
+}
+
+/* ---------- Controles (botones, mute) ---------- */
+.controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.controls button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--control-border);
+  background: #fff;
+  cursor: pointer;
+}
+
+.controls label {
+  font-size: 14px;
+}
+
+/* ---------- Escena: contenedor y objetos ---------- */
+#paisaje {
+  position: relative;
+  width: var(--paisaje-w);
+  height: var(--paisaje-h);
+  border: 1px solid gray;
+  background: var(--scene-bg);
+  margin: 8px auto;
+  overflow: hidden;
+}
+
+.objeto {
+  position: absolute;
+  pointer-events: none;
+}
+
+#nube {
+  top: 30px;
+  left: 40px;
+  width: var(--obj-width-small);
+}
+
+#sol {
+  top: 45px;
+  right: 70px;
+  width: var(--obj-width-small);
+}
+
+#nevado {
+  bottom: -17px;
+  left: -17px;
+  width: 520px;
+}
+
+#nevado2 {
+  bottom: -17px;
+  right: -30px;
+  width: 520px;
+}
+
+#bici {
+  bottom: -25px;
+  left: 350px;
+  z-index: 2;
+  width: var(--obj-width-med);
+}
+
+#arbol {
+  right: 80px;
+  bottom: -4px;
+  z-index: 3;
+  width: var(--obj-width-med);
+}
+
+/* ---------- Responsive: ajustes para pantallas pequeñas ---------- */
+@media (max-width: 840px) {
+  #paisaje {
+    transform: scale(0.9);
+    transform-origin: top center;
+  }
+}
+
+/* Fin de archivo */

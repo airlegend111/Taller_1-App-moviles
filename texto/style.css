@@ -1,0 +1,69 @@
+/* ==========================
+	 texto/style.css
+	 Organizado y comentado
+	 - Variables
+	 - Base / layout
+	 - Campo de texto
+	 - Meta / contador
+	 ========================== */
+
+/* ---------- Variables principales ---------- */
+:root {
+	--bg: #f7fbff;
+	--text: #062024;
+	--panel-bg: #fff;
+	--panel-border: #d6e6ed;
+	--input-border: #cfe0e8;
+}
+
+/* ---------- Base / layout ---------- */
+* {
+	box-sizing: border-box;
+	font-family: Segoe UI, Roboto, Arial, sans-serif;
+}
+
+body {
+	background: var(--bg);
+	padding: 18px;
+	color: var(--text);
+}
+
+main {
+	max-width: 720px;
+	margin: 0 auto;
+}
+
+h1 {
+	margin: 0 0 12px;
+}
+
+.box {
+	background: var(--panel-bg);
+	padding: 12px;
+	border: 1px solid var(--panel-border);
+	border-radius: 8px;
+}
+
+/* ---------- Campo de texto editable ---------- */
+textarea {
+	width: 100%;
+	min-height: 120px;
+	padding: 8px;
+	border: 1px solid var(--input-border);
+	border-radius: 6px;
+	font-size: 14px;
+}
+
+/* ---------- Metadatos (contador, etc.) ---------- */
+.meta {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 8px;
+	color: #234;
+}
+
+#contador {
+	font-weight: 600;
+}
+
+/* Fin de archivo */

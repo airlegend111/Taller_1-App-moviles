@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Campo de texto con contador</title>
+  <link rel="stylesheet" href="style.css">
+  <!--
+    texto/index.html
+
+    Página demo con un textarea y un contador que muestra en tiempo real la
+    cantidad de caracteres ingresados. No hay límite impuesto: acepta texto
+    indefinido y sólo muestra el conteo actualizado.
+
+    Archivo relacionado:
+    - script.js : lógica del contador en tiempo real (evento input)
+  -->
+</head>
+<body>
+  <main>
+    <h1>Campo de texto - contador en tiempo real</h1>
+    <div class="box">
+      <label for="mensaje">Escribe tu mensaje:</label>
+      <textarea id="mensaje" rows="6" placeholder="Escribe aquí..."></textarea>
+      <div class="meta">
+      <div id="contador">0 caracteres</div>
+      </div>
+    </div>
+  </main>
+  <!-- script.js actualiza el contador en tiempo real usando el evento 'input' -->
+  <script src="script.js"></script>
+</body>
+</html>

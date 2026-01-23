@@ -9,7 +9,7 @@
 	 ========================== */
 
 /* ---------- Variables y reset pequeño ---------- */
-:root{
+:root {
 	--bg: #fff;
 	--text: #111;
 	--border: #999;
@@ -21,72 +21,89 @@
 	--key-size: 60px; /* altura objetivo de las teclas */
 }
 
-*{box-sizing:border-box;font-family:Segoe UI, Roboto, Arial, sans-serif}
-body{background:var(--bg);margin:20px;color:var(--text)}
+* {
+	box-sizing: border-box;
+	font-family: Segoe UI, Roboto, Arial, sans-serif;
+}
+
+body {
+	background: var(--bg);
+	margin: 20px;
+	color: var(--text);
+}
 
 /* ---------- Contenedor principal (.caja_clave) ---------- */
-.caja_clave{
-	width:200px;              /* ancho fijo como en el ejemplo */
-	margin:0 auto;            /* centrar horizontalmente */
-	border:1px solid var(--border);
-	padding:6px;
-	box-sizing:border-box;
+.caja_clave {
+	width: 200px;              /* ancho fijo como en el ejemplo */
+	margin: 0 auto;            /* centrar horizontalmente */
+	border: 1px solid var(--border);
+	padding: 6px;
+	box-sizing: border-box;
 	background: #fff;
 }
 
 /* ---------- Campo de clave (input) ---------- */
-.clave{
-	width:100%;
-	height:40px;
-	padding-left:10px;
-	box-sizing:border-box;
-	border:1px solid var(--input-border);
-	margin:0 0 8px 0;
-	font-size:16px;
+.clave {
+	width: 100%;
+	height: 40px;
+	padding-left: 10px;
+	box-sizing: border-box;
+	border: 1px solid var(--input-border);
+	margin: 0 0 8px 0;
+	font-size: 16px;
 }
 
 /* ---------- Teclado: grid con 3 columnas ---------- */
-#teclado{
-	border:1px solid grey;            /* borde visible como en tu ejemplo */
-	width:100%;                       /* ajusta al ancho de .caja_clave */
-	text-align:center;
-	padding:8px;
-	display:grid;
-	grid-template-columns:repeat(3,1fr);
-	grid-auto-rows:var(--key-size);
-	gap:var(--gap);
-	box-sizing:border-box;
+#teclado {
+	border: 1px solid grey;            /* borde visible como en tu ejemplo */
+	width: 100%;                       /* ajusta al ancho de .caja_clave */
+	text-align: center;
+	padding: 8px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-auto-rows: var(--key-size);
+	gap: var(--gap);
+	box-sizing: border-box;
 }
 
 /* ---------- Estilos de cada tecla ---------- */
-.tecla{
-	width:100%;
-	height:100%;
-	background:var(--key-bg);
-	color:var(--key-color);
-	border:none;
-	border-radius:var(--key-radius);
-	margin:0;
-	cursor:pointer;
-	display:flex;
-	align-items:center;
-	justify-content:center;
-	font-size:16px;
-	user-select:none;
+.tecla {
+	width: 100%;
+	height: 100%;
+	background: var(--key-bg);
+	color: var(--key-color);
+	border: none;
+	border-radius: var(--key-radius);
+	margin: 0;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 16px;
+	user-select: none;
 }
-.tecla:active{transform:translateY(1px)}
+
+.tecla:active {
+	transform: translateY(1px);
+}
 
 /* La tecla borrar ocupa 2 columnas */
-.borrar{grid-column:2 / span 2}
+.borrar {
+	grid-column: 2 / span 2;
+}
 
 /* ---------- Texto de referencia / info ---------- */
-.info{max-width:200px;margin:12px auto;font-size:13px}
+.info {
+	max-width: 200px;
+	margin: 12px auto;
+	font-size: 13px;
+}
 
 /* ---------- Responsive (ajustes en pantallas pequeñas) ---------- */
-@media (max-width:480px){
-	.caja_clave{width:180px}
-	#teclado{grid-auto-rows:52px}
-	:root{--key-size:52px}
+@media (max-width: 480px) {
+	.caja_clave { width: 180px; }
+	#teclado { grid-auto-rows: 52px; }
+	:root { --key-size: 52px; }
 }
 
 /* Fin de archivo */

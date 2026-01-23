@@ -5,11 +5,29 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Ingreso de Clave - Sucursal Virtual</title>
   <link rel="stylesheet" href="style.css">
+  <!--
+    Este HTML muestra un teclado numérico en pantalla y un campo de entrada
+    tipo password. Está pensado como demo/local de ingreso de clave para
+    un reto de JavaScript.
+
+    Comportamiento principal (implementado en script.js):
+    - Hacer clic en una tecla numérica añade el dígito al input.
+    - La tecla "Borrar" elimina el último dígito (comportamiento tipo Backspace).
+    - Soporte de teclado físico: pulsar 0-9 añade dígitos y Backspace borra.
+    - El script mantiene el foco en el input tras cada pulsación para usabilidad.
+
+    Archivos relacionados:
+    - style.css : estilos y layout del keypad
+    - script.js  : lógica de eventos del teclado en pantalla y teclado físico
+  -->
 </head>
 <body>
   <main>
     <section class="caja_clave">
+      <!-- Campo oculto tipo password para que los dígitos no se muestren en claro -->
       <input type="password" placeholder="Clave acá" class="clave" id="claveInput">
+
+      <!-- Teclado en grid. Cada botón tiene clase .tecla, y la tecla Borrar además la clase .borrar -->
       <section id="teclado">
         <input type="button" value="1" class="tecla">
         <input type="button" value="2" class="tecla">
@@ -25,9 +43,9 @@
       </section>
     </section>
 
-
   </main>
 
+  <!-- Lógica del keypad: ver comentarios detallados en script.js -->
   <script src="script.js"></script>
 </body>
 </html>

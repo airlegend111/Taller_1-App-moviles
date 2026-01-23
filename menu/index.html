@@ -5,9 +5,26 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Menú con Scroll - Sucursal Virtual</title>
   <link rel="stylesheet" href="style.css">
+  <!--
+    menu/index.html
+
+    Página de ejemplo que demuestra navegación en una sola página con:
+    - Enlaces del menú que usan scrollIntoView({behavior:'smooth'}) para
+      desplazamiento suave a secciones internas.
+    - Script que marca la sección activa en el menú usando IntersectionObserver
+      cuando está disponible, y un fallback por scroll si no existe.
+
+    Archivos relacionados:
+    - style.css  : estilos del topbar, navegación y secciones.
+    - script.js  : lógica JS para scroll suave y detección de sección activa.
+  -->
 </head>
 <body>
   <header class="topbar">
+    <!--
+      Navegación: cada enlace apunta a una sección mediante href="#id".
+      La clase "active" se añade/quita dinámicamente desde script.js.
+    -->
     <nav class="nav" id="nav">
       <a href="#home" class="nav-link active">Home</a>
       <a href="#features" class="nav-link">Features</a>
@@ -39,6 +56,7 @@
     </section>
   </main>
 
+  <!-- Lógica: smooth scroll y highlight de sección activa -->
   <script src="script.js"></script>
 </body>
 </html>

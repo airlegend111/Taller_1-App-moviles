@@ -1,10 +1,92 @@
-*{box-sizing:border-box;font-family:Segoe UI, Roboto, Arial, sans-serif}
-body{margin:0;color:#0f1724;background:linear-gradient(#f8fafc,#eef2ff)}
-.topbar{position:sticky;top:0;background:#fff;border-bottom:1px solid #e6eef8;z-index:40}
-.nav{display:flex;gap:8px;max-width:960px;margin:0 auto;padding:12px}
-.nav-link{padding:8px 12px;border-radius:6px;color:#0f1724;text-decoration:none}
-.nav-link.active{background:#1e3a8a;color:#fff}
-.wrap{max-width:960px;margin:22px auto;padding:0 12px}
-.section{padding:60px 12px;border-radius:8px;background:rgba(255,255,255,0.6);margin-bottom:18px;box-shadow:0 6px 16px rgba(30,58,138,0.06);min-height:70vh}
-.section h2{margin-top:0}
-@media (max-width:540px){.nav{overflow:auto;padding:8px}}
+/* ==========================
+	 menu/style.css
+	 Organizado y comentado
+	 - Variables
+	 - Reset / base
+	 - Topbar / nav
+	 - Layout / secciones
+	 - Responsive
+	 ========================== */
+
+/* ---------- Variables principales ---------- */
+:root {
+	--bg-start: #f8fafc;
+	--bg-end: #eef2ff;
+	--text: #0f1724;
+	--accent: #1e3a8a;
+	--section-bg: rgba(255, 255, 255, 0.6);
+	--shadow: 0 6px 16px rgba(30, 58, 138, 0.06);
+	--max-width: 960px;
+	--gap: 8px;
+}
+
+/* ---------- Base / reset pequeño ---------- */
+* {
+	box-sizing: border-box;
+	font-family: Segoe UI, Roboto, Arial, sans-serif;
+}
+
+body {
+	margin: 0;
+	color: var(--text);
+	background: linear-gradient(var(--bg-start), var(--bg-end));
+}
+
+/* ---------- Topbar y navegación ---------- */
+.topbar {
+	position: sticky;
+	top: 0;
+	background: #fff;
+	border-bottom: 1px solid #e6eef8;
+	z-index: 40;
+}
+
+.nav {
+	display: flex;
+	gap: var(--gap);
+	max-width: var(--max-width);
+	margin: 0 auto;
+	padding: 12px;
+}
+
+.nav-link {
+	padding: 8px 12px;
+	border-radius: 6px;
+	color: var(--text);
+	text-decoration: none;
+}
+
+.nav-link.active {
+	background: var(--accent);
+	color: #fff;
+}
+
+/* ---------- Layout principal y secciones ---------- */
+.wrap {
+	max-width: var(--max-width);
+	margin: 22px auto;
+	padding: 0 12px;
+}
+
+.section {
+	padding: 60px 12px;
+	border-radius: 8px;
+	background: var(--section-bg);
+	margin-bottom: 18px;
+	box-shadow: var(--shadow);
+	min-height: 70vh;
+}
+
+.section h2 {
+	margin-top: 0;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 540px) {
+	.nav {
+		overflow: auto;
+		padding: 8px;
+	}
+}
+
+/* Fin de archivo */

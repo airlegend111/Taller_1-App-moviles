@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Animación con GSAP + Sonido</title>
+  <link rel="stylesheet" href="style.css">
+  <!--
+    anim/index.html
+
+    Demo de escena animada que usa:
+    - GSAP (CDN) para animaciones de elementos del DOM (nube, bici, sol, arbol, montañas).
+    - Howler (CDN) para reproducir sonidos desde archivos locales (carpeta Sonidos/).
+    - Web Audio API como fallback para reproducir un beep cuando Howler/no hay archivo.
+
+    Notas importantes:
+    - Muchos navegadores bloquean reproducción de audio hasta que el usuario
+      realiza una interacción (click). Por eso hay un botón "Iniciar animación & sonido"
+      que debe pulsarse antes de reproducir audio.
+    - El archivo de sonido (ej. Sonidos/bike-bell-173588.mp3) debe existir en la carpeta
+      para que Howler reproduzca la campana.
+  -->
+</head>
+<body>
+  <main>
+    <h1>Escena animada (GSAP) con sonido</h1>
+    <div class="controls">
+      <button id="startBtn">Iniciar animación & sonido</button>
+      <button id="stopBtn">Detener animación</button>
+      <label><input type="checkbox" id="muteCb"> Mute</label>
+    </div>
+
+    <!-- Contenedor de la escena: imágenes posicionadas con CSS y animadas con GSAP -->
+    <div id="paisaje">
+      <img id="nube" class="objeto" src="https://icons.iconarchive.com/icons/flaticonmaker/flat-style/128/cloud-icon.png" alt="nube">
+      <img id="bici" class="objeto" src="https://icons.iconarchive.com/icons/aha-soft/transport/128/bike-icon.png" alt="bici">
+      <img id="arbol" class="objeto" src="https://icons.iconarchive.com/icons/google/noto-emoji-animals-nature/128/22330-deciduous-tree-icon.png" alt="arbol">
+      <img id="sol" class="objeto" src="https://icons.iconarchive.com/icons/dapino/beach/128/sun-icon.png" alt="sol">
+      <img id="nevado" class="objeto" src="https://icons.iconarchive.com/icons/google/noto-emoji-travel-places/512/42462-mountain-icon.png" alt="montana">
+      <img id="nevado2" class="objeto" src="https://icons.iconarchive.com/icons/google/noto-emoji-travel-places/512/42462-mountain-icon.png" alt="montana2">
+    </div>
+
+  </main>
+
+  <!-- Librerías externas cargadas desde CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+  <!-- script.js controla animaciones y sonido; ver comentarios detallados en ese archivo -->
+  <script src="script.js"></script>
+</body>
+</html>
