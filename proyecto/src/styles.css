@@ -7,21 +7,42 @@
     --color-light: #f4f4f4;       /* Gris claro */
     --color-white: #ffffff;
     
-    /* Espaciado y tipografía */
+    /* Espaciado y tipografía - Generoso tipo BASIC/DEPT */
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
     --spacing-md: 1.5rem;
     --spacing-lg: 2rem;
     --spacing-xl: 3rem;
-    --spacing-xxl: 4rem;
+    --spacing-xxl: 5rem;
+    --spacing-xxxl: 6rem;
     
-    /* Tipografía */
-    --font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    /* Tipografía - Estilo BASIC/DEPT con Inter */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-weight-light: 300;
     --font-weight-regular: 400;
     --font-weight-medium: 500;
+    --font-weight-semibold: 600;
     --font-weight-bold: 700;
-    --font-weight-black: 900;
+    --font-weight-extrabold: 800;
+}
+
+/* =====================================================
+   LOCOMOTIVE SCROLL - Configuración global
+   ===================================================== */
+html.has-scroll-smooth {
+    scroll-behavior: auto;
+}
+
+html.has-scroll-dragging {
+    user-select: none;
+}
+
+.has-scroll-smooth body {
+    overflow: hidden;
+}
+
+.has-scroll-smooth [data-scroll-container] {
+    position: relative;
 }
 
 /* =====================================================
@@ -43,6 +64,7 @@ body {
     color: var(--color-dark);
     line-height: 1.6;
     overflow-x: hidden;
+    cursor: none;
 }
 
 a {
@@ -58,8 +80,7 @@ button {
 }
 
 /* =====================================================
-   HEADER FIJO - Cambia de estilo al hacer scroll
-   [RETO: Scroll event]
+   HEADER - Tipo BASIC/DEPT (Fijo con comportamiento scroll)
    ===================================================== */
 .header {
     position: fixed;
@@ -67,16 +88,51 @@ button {
     left: 0;
     right: 0;
     z-index: 1000;
-    padding: var(--spacing-lg);
-    background: transparent;
-    transition: all 0.3s ease;
-    border-bottom: 1px solid transparent;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(0px);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-bottom: 1px solid rgba(255, 255, 255, 0);
 }
 
-.header.scrolled {
+/* Estado inicial - Hero visible */
+.header:not(.header--scrolled) {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.header:not(.header--scrolled) .logo {
+    color: var(--color-dark);
+}
+
+.header:not(.header--scrolled) .nav-link {
+    color: var(--color-dark);
+}
+
+.header:not(.header--scrolled) .btn-talk {
+    background-color: var(--color-dark);
+    color: var(--color-white);
+}
+
+/* Estado scrolled - Después de pasar el hero */
+.header.header--scrolled {
     background: rgba(255, 255, 255, 0.98);
-    border-bottom: 1px solid var(--color-light);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: var(--spacing-md) var(--spacing-xl);
+}
+
+.header.header--scrolled .logo {
+    color: var(--color-dark);
+}
+
+.header.header--scrolled .nav-link {
+    color: var(--color-dark);
+}
+
+.header.header--scrolled .btn-talk {
+    background-color: var(--color-dark);
+    color: var(--color-white);
 }
 
 .header-container {
@@ -85,33 +141,40 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: var(--spacing-xxl);
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: var(--font-weight-black);
-    letter-spacing: 0.1em;
+    font-size: 1.3rem;
+    font-weight: var(--font-weight-extrabold);
+    letter-spacing: 0.15em;
     color: var(--color-dark);
+    transition: color 0.4s ease;
+    flex-shrink: 0;
 }
 
 .nav {
     display: flex;
     gap: var(--spacing-xl);
+    flex: 1;
+    justify-content: center;
 }
 
 .nav-link {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: var(--font-weight-medium);
     color: var(--color-dark);
     position: relative;
     transition: color 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
 }
 
-/* RETO: Hover effect en enlaces */
 .nav-link::after {
     content: '';
     position: absolute;
-    bottom: -5px;
+    bottom: -8px;
     left: 0;
     width: 0;
     height: 2px;
@@ -133,12 +196,13 @@ button {
     padding: var(--spacing-sm) var(--spacing-lg);
     border-radius: 0;
     font-weight: var(--font-weight-bold);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     letter-spacing: 0.05em;
-    
-    /* RETO: Hover effect en botones */
+    text-transform: uppercase;
     position: relative;
     overflow: hidden;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
 }
 
 .btn-talk::before {
@@ -162,8 +226,45 @@ button {
 }
 
 /* =====================================================
-   HERO SECTION - 100vh
-   [RETO: Scroll event - aparición suave]
+   CUSTOM CURSOR - Tipo BASIC/DEPT
+   Cursor personalizado que sigue el mouse
+   ===================================================== */
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--color-dark);
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: multiply;
+    opacity: 0.8;
+    transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
+    transform: translate(-50%, -50%);
+    will-change: transform;
+}
+
+/* Cursor activo en links y botones */
+.custom-cursor--link {
+    width: 30px;
+    height: 30px;
+    background-color: var(--color-accent);
+    opacity: 0.6;
+}
+
+/* Cursor activo en tarjetas */
+.custom-cursor--active {
+    width: 24px;
+    height: 24px;
+    background-color: var(--color-accent);
+    opacity: 0.7;
+}
+
+/* =====================================================
+   HERO SECTION - Full Screen con VIDEO (BASIC/DEPT style)
+   [VIDEO PATH: media/hero-visual.mp4]
    ===================================================== */
 .hero {
     position: relative;
@@ -172,31 +273,59 @@ button {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    margin-top: 60px;
+    margin-top: 0;
 }
 
-.hero-background {
+.hero__video-wrapper {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, var(--color-light) 0%, #f9f9f9 100%);
     z-index: -1;
-    /* COMENTARIO: Aquí va el background image o video en production */
+    background: #000;
 }
 
-.hero-content {
+/* Video responsivo - cubre todo el hero */
+.hero__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Overlay gradient oscuro para legibilidad de texto */
+.hero__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg, 
+        rgba(0, 0, 0, 0.35) 0%,
+        rgba(0, 0, 0, 0.25) 50%,
+        rgba(0, 0, 0, 0.35) 100%
+    );
+    z-index: 0;
+}
+
+.hero__content {
     text-align: center;
-    max-width: 800px;
-    padding: var(--spacing-xl);
-    animation: fadeInUp 1s ease;
+    max-width: 850px;
+    padding: var(--spacing-xxl) var(--spacing-xl);
+    z-index: 2;
+    position: relative;
+    animation: fadeInUp 1.2s ease 0.2s backwards;
 }
 
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(40px);
     }
     to {
         opacity: 1;
@@ -204,83 +333,85 @@ button {
     }
 }
 
-.hero-title {
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
-    font-weight: var(--font-weight-black);
-    line-height: 1.2;
+.hero__title {
+    font-size: clamp(2.8rem, 10vw, 5.5rem);
+    font-weight: var(--font-weight-extrabold);
+    line-height: 1.1;
     margin-bottom: var(--spacing-lg);
-    color: var(--color-dark);
+    color: var(--color-white);
+    letter-spacing: -0.02em;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-.hero-subtitle {
-    font-size: 1.2rem;
+.hero__subtitle {
+    font-size: clamp(1rem, 2vw, 1.2rem);
     font-weight: var(--font-weight-light);
-    color: #666;
-    margin-bottom: var(--spacing-xl);
-    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: var(--spacing-xxl);
+    line-height: 1.7;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-.hero-cta {
+.hero__cta {
     display: flex;
     gap: var(--spacing-lg);
     justify-content: center;
     flex-wrap: wrap;
+    animation: fadeInUp 1.2s ease 0.4s backwards;
 }
 
-/* Botón Primario */
-.btn-primary {
+/* Botones generales */
+.btn {
+    font-family: var(--font-family);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: var(--font-weight-bold);
+    font-size: 0.95rem;
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: 0;
+}
+
+/* Botón Primario - Dark to Accent */
+.btn--primary {
     background-color: var(--color-dark);
     color: var(--color-white);
-    padding: var(--spacing-md) var(--spacing-xl);
-    border-radius: 0;
-    font-weight: var(--font-weight-bold);
-    font-size: 1rem;
-    letter-spacing: 0.05em;
-    
-    /* RETO: Hover effect */
-    position: relative;
-    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-.btn-primary::before {
+.btn--primary::before {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-color: var(--color-accent);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.5s ease, height 0.5s ease;
+    z-index: -1;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.btn-primary:hover::before {
-    width: 300px;
-    height: 300px;
-}
-
-.btn-primary:hover {
+.btn--primary:hover {
     color: var(--color-dark);
+    box-shadow: 0 15px 40px rgba(249, 205, 205, 0.3);
 }
 
-/* Botón Secundario */
-.btn-secondary {
+/* Botón Secundario - Border to Accent */
+.btn--secondary {
     background-color: transparent;
-    color: var(--color-dark);
-    padding: var(--spacing-md) var(--spacing-xl);
-    border: 2px solid var(--color-dark);
-    border-radius: 0;
-    font-weight: var(--font-weight-bold);
-    font-size: 1rem;
-    letter-spacing: 0.05em;
-    
-    /* RETO: Hover effect */
-    position: relative;
-    overflow: hidden;
+    color: var(--color-white);
+    border: 2px solid var(--color-white);
+    box-shadow: none;
 }
 
-.btn-secondary::before {
+.btn--secondary::before {
     content: '';
     position: absolute;
     top: 0;
@@ -288,14 +419,15 @@ button {
     width: 100%;
     height: 100%;
     background-color: var(--color-accent);
-    transition: left 0.3s ease;
+    transition: left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: -1;
 }
 
-.btn-secondary:hover::before {
+.btn--secondary:hover::before {
     left: 0;
 }
 
-.btn-secondary:hover {
+.btn--secondary:hover {
     border-color: var(--color-accent);
     color: var(--color-dark);
 }
@@ -366,8 +498,8 @@ button {
    [RETO: Draggable elements + Hover effects]
    ===================================================== */
 .featured-section {
-    padding: var(--spacing-xxl) var(--spacing-xl);
-    background-color: var(--color-light);
+    padding: var(--spacing-xxxl) var(--spacing-xl);
+    background-color: var(--color-white);
 }
 
 .featured-container {
@@ -381,10 +513,11 @@ button {
 }
 
 .section-title {
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: var(--font-weight-black);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: var(--font-weight-extrabold);
     margin-bottom: var(--spacing-lg);
     color: var(--color-dark);
+    letter-spacing: -0.01em;
 }
 
 .section-subtitle {
@@ -399,6 +532,7 @@ button {
     width: 100%;
     overflow: hidden;
     cursor: grab;
+    margin-top: var(--spacing-xl);
 }
 
 .featured-slider-wrapper:active {
@@ -431,13 +565,15 @@ button {
     scroll-snap-align: start;
     
     /* RETO: Hover effects en tarjetas */
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
     cursor: pointer;
+    border: 1px solid var(--color-light);
 }
 
 .project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px);
+    border-color: var(--color-dark);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
 }
 
 .project-image {
@@ -449,6 +585,19 @@ button {
     justify-content: center;
     overflow: hidden;
     position: relative;
+}
+
+/* Imágenes responsivas en tarjetas de proyectos con srcset */
+.project-image-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-image-img {
+    transform: scale(1.02);
 }
 
 .placeholder-image {
@@ -501,7 +650,7 @@ button {
    [RETO: Scroll event - aparición suave]
    ===================================================== */
 .about-section {
-    padding: var(--spacing-xxl) var(--spacing-xl);
+    padding: var(--spacing-xxxl) var(--spacing-xl);
     background-color: var(--color-white);
     animation: scrollFadeIn 1s ease;
 }
@@ -565,8 +714,8 @@ button {
    [RETO: Hover effects en tarjetas]
    ===================================================== */
 .services-section {
-    padding: var(--spacing-xxl) var(--spacing-xl);
-    background-color: var(--color-light);
+    padding: var(--spacing-xxxl) var(--spacing-xl);
+    background-color: var(--color-white);
     animation: scrollFadeIn 1s ease;
 }
 
@@ -577,8 +726,8 @@ button {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-xl);
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xxl);
     margin-top: var(--spacing-xxl);
 }
 
@@ -592,16 +741,18 @@ button {
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    border: none;
+    border-bottom: 2px solid var(--color-light);
 }
 
 .service-card::before {
     content: '';
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: -100%;
     width: 100%;
-    height: 4px;
-    background-color: var(--color-accent);
+    height: 2px;
+    background-color: var(--color-dark);
     transition: left 0.3s ease;
 }
 
@@ -610,8 +761,8 @@ button {
 }
 
 .service-card:hover {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transform: translateY(-5px);
+    box-shadow: none;
+    transform: translateY(0);
 }
 
 .service-card h3 {
@@ -628,86 +779,159 @@ button {
 }
 
 /* =====================================================
-   JOURNAL / NEWS SECTION
-   [RETO: Scroll event + Hover effects]
+   FEATURED NEWS SECTION - Moderna y Editorial
+   [RETO: Hover effects + Custom Cursor]
    ===================================================== */
-.journal-section {
-    padding: var(--spacing-xxl) var(--spacing-xl);
-    background-color: var(--color-white);
+.featured-news {
+    padding: var(--spacing-xxxl) var(--spacing-xl);
+    background-color: var(--color-light);
     animation: scrollFadeIn 1s ease;
 }
 
-.journal-container {
+.featured-news__container {
     max-width: 1400px;
     margin: 0 auto;
 }
 
-.journal-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--spacing-xl);
+.featured-news__header {
+    margin-bottom: var(--spacing-xxl);
+    animation: scrollFadeIn 1s ease;
+}
+
+.featured-news__subtitle {
+    font-size: 1.1rem;
+    font-weight: var(--font-weight-light);
+    color: #666;
+    max-width: 600px;
+}
+
+/* =====================================================
+   JOURNAL LIST - Lista Editorial Horizontal tipo BASIC
+   [RETO: Hover effects + Custom cursor integration]
+   ===================================================== */
+.journal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
     margin-top: var(--spacing-xxl);
 }
 
-.journal-card {
-    background-color: var(--color-white);
-    border-radius: 0;
-    overflow: hidden;
-    
-    /* RETO: Hover effects en tarjetas */
+/* Artículos individuales - Layout horizontal */
+.journal-item {
+    display: flex;
+    align-items: stretch;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-xl) 0;
+    border-top: 1px solid var(--color-dark);
     transition: all 0.3s ease;
     cursor: pointer;
-    border: 1px solid var(--color-light);
-}
-
-.journal-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    border-color: var(--color-accent);
-}
-
-.journal-image {
-    width: 100%;
-    height: 200px;
-    background-color: var(--color-accent);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
     position: relative;
 }
 
-.journal-card:hover .journal-image {
-    transform: scale(1.05);
+.journal-item:last-child {
+    border-bottom: 1px solid var(--color-dark);
 }
 
-.journal-info {
-    padding: var(--spacing-lg);
+/* RETO: Hover effects en items */
+.journal-item--interactive:hover {
+    transform: translateY(-2px);
 }
 
-.journal-category {
+/* Media del artículo - Imagen izquierda */
+.journal-item__media {
+    flex: 0 0 320px;
+    height: 220px;
+    background-color: var(--color-accent);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Imágenes responsivas en lista journal con srcset */
+.journal-item-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+.journal-item--interactive:hover .journal-item-img {
+    transform: scale(1.02);
+}
+
+/* Contenido del artículo - Centro */
+.journal-item__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: var(--spacing-md) 0;
+}
+
+/* Categoría - Pequeña y en negrita */
+.journal-item__category {
     display: inline-block;
     font-size: 0.75rem;
     font-weight: var(--font-weight-bold);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--color-accent);
-    margin-bottom: var(--spacing-sm);
-}
-
-.journal-card h3 {
-    font-size: 1.2rem;
-    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.1em;
     color: var(--color-dark);
     margin-bottom: var(--spacing-sm);
     line-height: 1.4;
 }
 
-.journal-date {
+.journal-item--interactive:hover .journal-item__category {
+    color: var(--color-accent);
+    transition: color 0.3s ease;
+}
+
+/* Título del artículo - Grande */
+.journal-item__title {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin-bottom: auto;
+    line-height: 1.35;
+    transition: color 0.3s ease;
+}
+
+.journal-item--interactive:hover .journal-item__title {
+    color: var(--color-accent);
+}
+
+/* Fecha - Sutil en la parte baja */
+.journal-item__date {
     font-size: 0.85rem;
     color: #999;
-    margin: 0;
+    font-weight: var(--font-weight-regular);
+    margin-top: var(--spacing-md);
 }
+
+/* Link/Flecha derecha */
+.journal-item__link {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--color-dark);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 0 var(--spacing-sm);
+    min-width: 60px;
+    min-height: 60px;
+}
+
+.journal-item--interactive:hover .journal-item__link {
+    color: var(--color-accent);
+    transform: translateX(4px);
+}
+
+/* =====================================================
+   JOURNAL / NEWS SECTION - Antiguo (Eliminado)
+   ===================================================== */
 
 /* =====================================================
    FOOTER
@@ -773,6 +997,76 @@ button {
 }
 
 /* =====================================================
+   CUSTOM CURSOR - Efecto tipo BASIC/DEPT
+   [RETO: Custom cursor que sigue el mouse con múltiples estados]
+   ===================================================== */
+.custom-cursor {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    border: 1.5px solid var(--color-dark);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: multiply;
+    transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+    
+    /* Suavizar la animación */
+    will-change: transform;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+}
+
+/* Estado activo - Cuando está sobre elementos interactivos (links, botones) */
+.custom-cursor--active {
+    width: 24px;
+    height: 24px;
+    background-color: var(--color-dark);
+    border-color: var(--color-dark);
+    opacity: 0.5;
+}
+
+/* Estado para tarjetas de noticias y proyectos */
+.custom-cursor--news-active {
+    width: 28px;
+    height: 28px;
+    background-color: transparent;
+    border-color: var(--color-accent);
+    border-width: 2px;
+}
+
+/* Estado para draggable - En el slider de proyectos */
+.custom-cursor--drag {
+    width: 36px;
+    height: 36px;
+    background-color: transparent;
+    border-color: var(--color-dark);
+    border-width: 2px;
+    opacity: 0.8;
+}
+
+.custom-cursor--drag::before {
+    content: 'DRAG';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.6rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    letter-spacing: 0.1em;
+}
+
+/* Estado para enlaces y botones */
+.custom-cursor--link-active {
+    width: 20px;
+    height: 20px;
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    opacity: 0.6;
+}
+
+/* =====================================================
    RESPONSIVE DESIGN
    ===================================================== */
 
@@ -830,8 +1124,20 @@ button {
         grid-template-columns: 1fr;
     }
 
-    .journal-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* Journal List en tablet - Layout sigue horizontal */
+    .journal-item {
+        flex-direction: row;
+        gap: var(--spacing-md);
+        padding: var(--spacing-lg) 0;
+    }
+
+    .journal-item__media {
+        flex: 0 0 240px;
+        height: 160px;
+    }
+
+    .journal-item__title {
+        font-size: 1.2rem;
     }
 
     .section-title {
@@ -841,7 +1147,7 @@ button {
     .featured-section,
     .about-section,
     .services-section,
-    .journal-section {
+    .featured-news {
         padding: var(--spacing-xl) var(--spacing-md);
     }
 }
@@ -919,6 +1225,29 @@ button {
 
     .section-subtitle {
         font-size: 0.95rem;
+    }
+
+    /* Journal List en móvil - Columna vertical */
+    .journal-item {
+        flex-direction: column;
+        gap: 0;
+        padding: var(--spacing-lg) 0;
+    }
+
+    .journal-item__media {
+        flex: 0 0 auto;
+        width: 100%;
+        height: 200px;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .journal-item__link {
+        align-self: flex-end;
+        min-width: auto;
+    }
+
+    .journal-item__title {
+        font-size: 1.1rem;
     }
 
     .footer-content {

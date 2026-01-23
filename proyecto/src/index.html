@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEXUS - Agencia Digital de Branding y Diseño</title>
+    <!-- Locomotive Scroll CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4/dist/locomotive-scroll.css">
     <link rel="stylesheet" href="styles.css">
-    <!-- Google Fonts: Roboto para un diseño moderno y limpio -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Inter - Tipografía premium tipo BASIC/DEPT -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body>
+<body data-scroll-container>
+    <!-- ============================================
+         CUSTOM CURSOR - Sigue el mouse por la página
+         ============================================ -->
+    <div class="custom-cursor" id="customCursor"></div>
     <!-- ============================================
          HEADER FIJO - Cambia de estilo al hacer scroll
          ============================================ -->
@@ -32,25 +38,40 @@
     </header>
 
     <!-- ============================================
-         HERO SECTION - 100vh
-         [REEMPLAZA: Agrega imagen o video de fondo en media/ folder]
+         HERO SECTION - 100vh Full Screen con VIDEO
+         Inspirado en BASIC/DEPT
+         [VIDEO PATH: media/hero-visual.mp4]
          ============================================ -->
     <section class="hero" id="hero">
-        <!-- Contenedor para imagen/video de fondo -->
-        <div class="hero-background">
-            <!-- COMENTARIO: Aquí irá tu imagen o video de fondo. Puedes usar un <img> o <video> -->
+        <!-- Video de fondo - tipo BASIC/DEPT -->
+        <div class="hero__video-wrapper">
+            <video 
+                class="hero__video" 
+                autoplay 
+                muted 
+                loop 
+                playsinline 
+                poster="media/hero-poster.jpg"
+            >
+                <!-- VIDEO PRINCIPAL (HD) -->
+                <source src="media/hero-visual.mp4" type="video/mp4">
+                Tu navegador no soporta videos HTML5.
+            </video>
+            <!-- Overlay gradient para legibilidad de texto -->
+            <div class="hero__overlay"></div>
         </div>
         
-        <div class="hero-content">
-            <h1 class="hero-title">
+        <!-- Contenido del Hero -->
+        <div class="hero__content">
+            <h1 class="hero__title">
                 Branding Digital<br>Que Inspira
             </h1>
-            <p class="hero-subtitle">
+            <p class="hero__subtitle">
                 Creamos productos digitales, experiencias de e‑commerce y estrategias de marca que generan valor real a tu negocio.
             </p>
-            <div class="hero-cta">
-                <button class="btn-primary">Descubre Nuestro Trabajo</button>
-                <button class="btn-secondary">Ver Servicios</button>
+            <div class="hero__cta">
+                <button class="btn btn--primary">Descubre Nuestro Trabajo</button>
+                <button class="btn btn--secondary">Ver Servicios</button>
             </div>
         </div>
     </section>
@@ -91,8 +112,11 @@
                     
                     <div class="project-card">
                         <div class="project-image">
-                            <!-- REEMPLAZA: Agrega tu imagen de proyecto aquí -->
-                            <div class="placeholder-image">Proyecto 1</div>
+                            <img 
+                                src="media/carrusel_1.jpg" 
+                                alt="Identidad Visual Moderna"
+                                class="project-image-img"
+                            >
                         </div>
                         <div class="project-info">
                             <h3 class="project-name">Identidad Visual Moderna</h3>
@@ -104,8 +128,11 @@
 
                     <div class="project-card">
                         <div class="project-image">
-                            <!-- REEMPLAZA: Agrega tu imagen de proyecto aquí -->
-                            <div class="placeholder-image">Proyecto 2</div>
+                            <img 
+                                src="media/carrusel_2.jpg" 
+                                alt="E-Commerce Digital"
+                                class="project-image-img"
+                            >
                         </div>
                         <div class="project-info">
                             <h3 class="project-name">E‑Commerce Digital</h3>
@@ -117,8 +144,11 @@
 
                     <div class="project-card">
                         <div class="project-image">
-                            <!-- REEMPLAZA: Agrega tu imagen de proyecto aquí -->
-                            <div class="placeholder-image">Proyecto 3</div>
+                            <img 
+                                src="media/carrusel_3.jpg" 
+                                alt="Estrategia de Marca Global"
+                                class="project-image-img"
+                            >
                         </div>
                         <div class="project-info">
                             <h3 class="project-name">Estrategia de Marca Global</h3>
@@ -130,8 +160,11 @@
 
                     <div class="project-card">
                         <div class="project-image">
-                            <!-- REEMPLAZA: Agrega tu imagen de proyecto aquí -->
-                            <div class="placeholder-image">Proyecto 4</div>
+                            <img 
+                                src="media/carrusel_4.jpg" 
+                                alt="Aplicación Móvil SaaS"
+                                class="project-image-img"
+                            >
                         </div>
                         <div class="project-info">
                             <h3 class="project-name">Aplicación Móvil SaaS</h3>
@@ -216,59 +249,118 @@
     </section>
 
     <!-- ============================================
-         JOURNAL / NEWS SECTION
-         [RETO: Scroll event + Hover effects en tarjetas]
+         FROM THE JOURNAL - Lista Editorial Horizontal
+         [RETO: Scroll event + Hover effects + Custom Cursor]
          ============================================ -->
-    <section class="journal-section" id="journal">
-        <div class="journal-container">
-            <h2 class="section-title">Artículos y Tendencias</h2>
-            <div class="journal-grid">
-                <article class="journal-card">
-                    <div class="journal-image">
-                        <!-- REEMPLAZA: Agrega tu imagen de artículo aquí -->
-                        <div class="placeholder-image">Artículo 1</div>
+    <section class="featured-news" id="journal">
+        <div class="featured-news__container">
+            <div class="featured-news__header">
+                <h2 class="section-title">From the Journal</h2>
+                <p class="featured-news__subtitle">Insights, trends, and stories from the digital world</p>
+            </div>
+            
+            <!-- Lista vertical de artículos -->
+            <div class="journal-list">
+                <!-- Article 1 -->
+                <article class="journal-item journal-item--interactive">
+                    <div class="journal-item__media">
+                        <img 
+                            src="media/journal_1.jpg" 
+                            alt="El Futuro del Diseño Generativo"
+                            class="journal-item-img"
+                        >
                     </div>
-                    <div class="journal-info">
-                        <span class="journal-category">Tendencias</span>
-                        <h3>El Futuro del Diseño Generativo</h3>
-                        <p class="journal-date">21 de enero, 2026</p>
+                    <div class="journal-item__content">
+                        <span class="journal-item__category">Announcement</span>
+                        <h3 class="journal-item__title">El Futuro del Diseño Generativo</h3>
+                        <time class="journal-item__date">21 de enero, 2026</time>
                     </div>
+                    <a href="#" class="journal-item__link">→</a>
                 </article>
 
-                <article class="journal-card">
-                    <div class="journal-image">
-                        <!-- REEMPLAZA: Agrega tu imagen de artículo aquí -->
-                        <div class="placeholder-image">Artículo 2</div>
+                <!-- Article 2 -->
+                <article class="journal-item journal-item--interactive">
+                    <div class="journal-item__media">
+                        <img 
+                            src="media/journal_2.jpg" 
+                            alt="Estrategia Omnichannel en 2026"
+                            class="journal-item-img"
+                        >
                     </div>
-                    <div class="journal-info">
-                        <span class="journal-category">Insights</span>
-                        <h3>Estrategia Omnichannel en 2026</h3>
-                        <p class="journal-date">18 de enero, 2026</p>
+                    <div class="journal-item__content">
+                        <span class="journal-item__category">Insight</span>
+                        <h3 class="journal-item__title">Estrategia Omnichannel en 2026</h3>
+                        <time class="journal-item__date">18 de enero, 2026</time>
                     </div>
+                    <a href="#" class="journal-item__link">→</a>
                 </article>
 
-                <article class="journal-card">
-                    <div class="journal-image">
-                        <!-- REEMPLAZA: Agrega tu imagen de artículo aquí -->
-                        <div class="placeholder-image">Artículo 3</div>
+                <!-- Article 3 -->
+                <article class="journal-item journal-item--interactive">
+                    <div class="journal-item__media">
+                        <img 
+                            src="media/journal_3.jpg" 
+                            alt="Rediseño de Identidad: Lecciones Aprendidas"
+                            class="journal-item-img"
+                        >
                     </div>
-                    <div class="journal-info">
-                        <span class="journal-category">Casos de Estudio</span>
-                        <h3>Rediseño de Identidad: Lecciones Aprendidas</h3>
-                        <p class="journal-date">15 de enero, 2026</p>
+                    <div class="journal-item__content">
+                        <span class="journal-item__category">Case Study</span>
+                        <h3 class="journal-item__title">Rediseño de Identidad: Lecciones Aprendidas</h3>
+                        <time class="journal-item__date">15 de enero, 2026</time>
                     </div>
+                    <a href="#" class="journal-item__link">→</a>
                 </article>
 
-                <article class="journal-card">
-                    <div class="journal-image">
-                        <!-- REEMPLAZA: Agrega tu imagen de artículo aquí -->
-                        <div class="placeholder-image">Artículo 4</div>
+                <!-- Article 4 -->
+                <article class="journal-item journal-item--interactive">
+                    <div class="journal-item__media">
+                        <img 
+                            src="media/journal_4.jpg" 
+                            alt="Accesibilidad Web: Más Allá del Cumplimiento"
+                            class="journal-item-img"
+                        >
                     </div>
-                    <div class="journal-info">
-                        <span class="journal-category">Desarrollo</span>
-                        <h3>Accesibilidad Web: Más Allá del Cumplimiento</h3>
-                        <p class="journal-date">12 de enero, 2026</p>
+                    <div class="journal-item__content">
+                        <span class="journal-item__category">Award</span>
+                        <h3 class="journal-item__title">Accesibilidad Web: Más Allá del Cumplimiento</h3>
+                        <time class="journal-item__date">12 de enero, 2026</time>
                     </div>
+                    <a href="#" class="journal-item__link">→</a>
+                </article>
+
+                <!-- Article 5 -->
+                <article class="journal-item journal-item--interactive">
+                    <div class="journal-item__media">
+                        <img 
+                            src="media/journal_5.jpg" 
+                            alt="Tendencias de UX/UI para el Próximo Año"
+                            class="journal-item-img"
+                        >
+                    </div>
+                    <div class="journal-item__content">
+                        <span class="journal-item__category">Insight</span>
+                        <h3 class="journal-item__title">Tendencias de UX/UI para el Próximo Año</h3>
+                        <time class="journal-item__date">10 de enero, 2026</time>
+                    </div>
+                    <a href="#" class="journal-item__link">→</a>
+                </article>
+
+                <!-- Article 6 -->
+                <article class="journal-item journal-item--interactive">
+                    <div class="journal-item__media">
+                        <img 
+                            src="media/journal_6.jpg" 
+                            alt="WebGL y Experiencias 3D en el Navegador"
+                            class="journal-item-img"
+                        >
+                    </div>
+                    <div class="journal-item__content">
+                        <span class="journal-item__category">Development</span>
+                        <h3 class="journal-item__title">WebGL y Experiencias 3D en el Navegador</h3>
+                        <time class="journal-item__date">8 de enero, 2026</time>
+                    </div>
+                    <a href="#" class="journal-item__link">→</a>
                 </article>
             </div>
         </div>
@@ -314,6 +406,8 @@
         </div>
     </footer>
 
+    <!-- Locomotive Scroll JS -->
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4/dist/locomotive-scroll.umd.js"></script>
     <!-- JavaScript para interactividad -->
     <script src="main.js"></script>
 </body>
