@@ -1,190 +1,227 @@
-/* =====================================================
-   MAIN.JS - Interactividad NEXUS (Tipo BASIC/DEPT)
-   FUNCIONALIDADES:
-   - Locomotive Scroll para scroll suave
-   - Header dinámico según scroll
-   - Cursor personalizado con estados
-   - Slider draggable en Featured Engagements
-   ===================================================== */
-
-// =====================================================
-// 0. LOCOMOTIVE SCROLL - Inicialización
-// ===================================================== 
-const scroll = new LocomotiveScroll({
-    el: document.querySelector('[data-scroll-container]'),
-    smooth: true,
-    smoothMobile: false,
-    inertia: 0.8,
-    class: 'is-reveal'
-});
-
-// =====================================================
-// 1. HEADER SCROLL BEHAVIOR - Tipo BASIC/DEPT
-// [Detecta scroll y cambia estilo del header]
-// =====================================================
 const header = document.getElementById('header');
-
-// Escuchar eventos de scroll con Locomotive
-scroll.on('scroll', (obj) => {
-    const heroHeight = document.getElementById('hero').offsetHeight;
-    
-    // Si scrolleamos más allá del hero, agregamos clase
-    if (obj.y > heroHeight - 100) {
-        header.classList.add('header--scrolled');
-    } else {
-        header.classList.remove('header--scrolled');
-    }
-});
-
-// =====================================================
-// 2. CUSTOM CURSOR - Sigue el mouse (BASIC/DEPT style)
-// [Cursor personalizado que responde a interacciones]
-// =====================================================
+const hero = document.getElementById('hero');
+const hamburger = document.getElementById('hamburger');
+const menuOverlay = document.getElementById('menuOverlay');
+const menuClose = document.getElementById('menuClose');
+const menuLinks = document.querySelectorAll('.menu-overlay-link');
 const customCursor = document.getElementById('customCursor');
-let mouseX = 0;
-let mouseY = 0;
-let cursorX = 0;
-let cursorY = 0;
+const featuredSlider = document.getElementById('featuredSlider');
+const navLinks = document.querySelectorAll('.nav-link');
 
-// Velocidad de interpolación del cursor
-const cursorSpeed = 0.25;
+let lastScrollTop = 0;
+let scrollDirection = 'down';
+let isMenuOpen = false;
+let locomotiveScroll;
 
-// Escuchar movimiento del mouse
-document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-});
+let ticking = false;
 
-// Animar cursor suavemente con RequestAnimationFrame
-function animateCursor() {
-    // Interpolación suave del cursor
-    cursorX += (mouseX - cursorX) * cursorSpeed;
-    cursorY += (mouseY - cursorY) * cursorSpeed;
+const headerObserverOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0
+};
+
+const heroObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            header.classList.remove('header--scrolled');
+            header.classList.add('header--on-hero');
+        }
+    });
+}, headerObserverOptions);
+
+const heroOutObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+            header.classList.remove('header--on-hero');
+            header.classList.add('header--scrolled');
+        }
+    });
+}, { threshold: 0.99 });
+
+heroObserver.observe(hero);
+heroOutObserver.observe(hero);
+
+const handleScroll = () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
-    customCursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+    if (isMenuOpen) {
+        return;
+    }
     
-    requestAnimationFrame(animateCursor);
-}
-
-animateCursor();
-
-// Detectar interacciones con elementos
-const interactiveElements = document.querySelectorAll(
-    'a, button, .project-card, .journal-item--interactive'
-);
-
-interactiveElements.forEach((element) => {
-    element.addEventListener('mouseenter', () => {
-        customCursor.classList.add('custom-cursor--link');
-    });
-// =====================================================
-// 3. DRAGGABLE SLIDER - Featured Engagements
-// [Slider draggable para proyectos]
-// =====================================================
-const slider = document.getElementById('featuredSlider');
-const sliderWrapper = document.querySelector('.featured-slider-wrapper');
-
-if (slider) {
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-
-    slider.addEventListener('mousedown', (e) => {
-        isDown = true;
-        slider.style.cursor = 'grabbing';
-        startX = e.pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
-    });
-
-    slider.addEventListener('mouseleave', () => {
-        isDown = false;
-        slider.style.cursor = 'grab';
-    });
-
-    slider.addEventListener('mouseup', () => {
-        isDown = false;
-        slider.style.cursor = 'grab';
-    });
-
-    slider.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 1;
-        slider.scrollLeft = scrollLeft - walk;
-    });
-
-    // Soporte para touch (móvil)
-    let touchStartX = 0;
-    let touchScrollLeft = 0;
-
-    slider.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-        touchScrollLeft = slider.scrollLeft;
-    });
-
-    slider.addEventListener('touchmove', (e) => {
-        const touchCurrentX = e.touches[0].clientX;
-        const touchWalk = (touchStartX - touchCurrentX) * 1.5;
-        slider.scrollLeft = touchScrollLeft + touchWalk;
-    });
-}
-
-// =====================================================
-// 4. SCROLL ANIMATIONS - Apariciones suaves con Locomotive
-// =====================================================
-const animateElements = document.querySelectorAll(
-    '.featured-section, .about-section, .services-section, .featured-news, .brands-section'
-);
-
-animateElements.forEach((element) => {
-    element.setAttribute('data-scroll', '');
-});
-
-// =====================================================
-// 5. SMOOTH SCROLL PARA ENLACES ANCLA
-// =====================================================
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener('click', (e) => {
-        const href = anchor.getAttribute('href');
-        if (href !== '#') {
-            e.preventDefault();
-            const target = document.querySelector(href);
-            if (target) {
-                scroll.scrollTo(target);
+    if (scrollTop > lastScrollTop) {
+        scrollDirection = 'down';
+        if (scrollTop > 100) {
+            if (!header.classList.contains('header--hidden')) {
+                header.classList.add('header--hidden');
             }
+        }
+    } else {
+        scrollDirection = 'up';
+        if (header.classList.contains('header--hidden')) {
+            header.classList.remove('header--hidden');
+            header.classList.add('header--animate-in');
+            
+            setTimeout(() => {
+                header.classList.remove('header--animate-in');
+            }, 400);
+        }
+    }
+    
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+};
+
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(handleScroll);
+        ticking = true;
+    }
+    ticking = false;
+}, false);
+
+hamburger.addEventListener('click', () => {
+    isMenuOpen = !isMenuOpen;
+    hamburger.classList.toggle('active');
+    menuOverlay.classList.toggle('menu-overlay--open');
+    document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto';
+});
+
+menuClose.addEventListener('click', () => {
+    isMenuOpen = false;
+    hamburger.classList.remove('active');
+    menuOverlay.classList.remove('menu-overlay--open');
+    document.body.style.overflow = 'auto';
+});
+
+menuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        isMenuOpen = false;
+        hamburger.classList.remove('active');
+        menuOverlay.classList.remove('menu-overlay--open');
+        document.body.style.overflow = 'auto';
+    });
+});
+
+navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+            targetSection.scrollIntoView({ behavior: 'smooth' });
         }
     });
 });
 
-// =====================================================
-// 6. EFECTOS DE HOVER EN TARJETAS
-// =====================================================
-const allCards = document.querySelectorAll('.project-card, .service-card, .journal-item--interactive');
+document.addEventListener('mousemove', (e) => {
+    customCursor.style.left = e.clientX + 'px';
+    customCursor.style.top = e.clientY + 'px';
+    customCursor.classList.add('active');
+});
 
-allCards.forEach((card) => {
-    card.addEventListener('mouseenter', () => {
-        card.style.cursor = 'pointer';
+document.addEventListener('mouseleave', () => {
+    customCursor.classList.remove('active');
+});
+
+const interactiveElements = document.querySelectorAll('a, button, .project-card, .service-card, .journal-item');
+interactiveElements.forEach(element => {
+    element.addEventListener('mouseenter', () => {
+        customCursor.classList.add('custom-cursor--link');
     });
-});
-
-// =====================================================
-// 7. INICIALIZACIÓN
-// =====================================================
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('✓ NEXUS Agency - Página cargada');
-    console.log('✓ Locomotive Scroll inicializado');
-    console.log('✓ Custom Cursor activo (Tipo BASIC/DEPT)');
-    console.log('✓ Header scroll effects activo');
-    console.log('✓ Slider draggable listo');
-    console.log('✓ Scroll animations iniciadas');
-    
-    setTimeout(() => {
-        scroll.update();
-    }, 100);
-});
-
     element.addEventListener('mouseleave', () => {
         customCursor.classList.remove('custom-cursor--link');
     });
 });
+
+let isDragging = false;
+let startX = 0;
+let scrollLeft = 0;
+
+featuredSlider.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.pageX - featuredSlider.offsetLeft;
+    scrollLeft = featuredSlider.scrollLeft;
+    customCursor.classList.add('custom-cursor--drag');
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const x = e.pageX - featuredSlider.offsetLeft;
+    const walk = (x - startX) * 2;
+    featuredSlider.scrollLeft = scrollLeft - walk;
+});
+
+document.addEventListener('mouseup', () => {
+    isDragging = false;
+    customCursor.classList.remove('custom-cursor--drag');
+});
+
+featuredSlider.addEventListener('mouseleave', () => {
+    isDragging = false;
+    customCursor.classList.remove('custom-cursor--drag');
+});
+
+const buttons = document.querySelectorAll('.btn-primary, .btn-secondary');
+buttons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        const targetId = e.target.getAttribute('data-target') || 'work';
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+            targetSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
+
+const initLocomotiveScroll = () => {
+    locomotiveScroll = new LocomotiveScroll({
+        el: document.querySelector('[data-scroll-container]'),
+        smooth: true,
+        multiplier: 1,
+        class: 'is-reveal',
+        smartphone: {
+            smooth: true
+        },
+        tablet: {
+            smooth: true
+        }
+    });
+
+    locomotiveScroll.on('scroll', ({ scroll }) => {
+        const scrollTop = scroll.y;
+        
+        if (isMenuOpen) {
+            return;
+        }
+        
+        if (scrollTop > lastScrollTop) {
+            scrollDirection = 'down';
+            if (scrollTop > 100) {
+                if (!header.classList.contains('header--hidden')) {
+                    header.classList.add('header--hidden');
+                }
+            }
+        } else {
+            scrollDirection = 'up';
+            if (header.classList.contains('header--hidden')) {
+                header.classList.remove('header--hidden');
+                header.classList.add('header--animate-in');
+                
+                setTimeout(() => {
+                    header.classList.remove('header--animate-in');
+                }, 400);
+            }
+        }
+        
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    });
+
+    window.addEventListener('resize', () => {
+        locomotiveScroll.update();
+    });
+};
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLocomotiveScroll);
+} else {
+    initLocomotiveScroll();
+}

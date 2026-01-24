@@ -1,0 +1,52 @@
+/* ===========================
+   MIXINS REUTILIZABLES
+   =========================== */
+
+// Media Queries
+@mixin media-sm {
+    @media (max-width: #{$breakpoint-sm}) {
+        @content;
+    }
+}
+
+@mixin media-md {
+    @media (max-width: #{$breakpoint-md}) {
+        @content;
+    }
+}
+
+@mixin media-lg {
+    @media (max-width: #{$breakpoint-lg}) {
+        @content;
+    }
+}
+
+// Flexbox
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+// Texto truncado
+@mixin truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+// Sombra
+@mixin shadow {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+// Transición suave
+@mixin transition($property: all) {
+    transition: $property $transition-normal;
+}

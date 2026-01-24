@@ -1,0 +1,39 @@
+/* ===========================
+   VARIABLES GLOBALES
+   =========================== */
+
+// Colores
+$color-primary: #1a1a1a;
+$color-secondary: #0066cc;
+$color-accent: #ff6b6b;
+$color-dark: #222222;
+$color-light: #f8f9fa;
+$color-white: #ffffff;
+$color-gray: #666666;
+
+// Tipografía
+$font-primary: 'Inter', sans-serif;
+$font-size-base: 16px;
+$font-size-sm: 14px;
+$font-size-lg: 20px;
+$font-size-xl: 32px;
+$font-size-xxl: 48px;
+
+// Espacios
+$spacing-xs: 8px;
+$spacing-sm: 16px;
+$spacing-md: 24px;
+$spacing-lg: 32px;
+$spacing-xl: 48px;
+$spacing-xxl: 64px;
+
+// Breakpoints
+$breakpoint-sm: 480px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+// Transiciones
+$transition-fast: 0.2s ease;
+$transition-normal: 0.3s ease;
+$transition-slow: 0.5s ease;

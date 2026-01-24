@@ -3,84 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS - Agencia Digital de Branding y Diseño</title>
-    <!-- Locomotive Scroll CSS -->
+    <title>NEXUS - Agencia Digital</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4/dist/locomotive-scroll.css">
     <link rel="stylesheet" href="styles.css">
-    <!-- Google Fonts: Inter - Tipografía premium tipo BASIC/DEPT -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body data-scroll-container>
-    <!-- ============================================
-         CUSTOM CURSOR - Sigue el mouse por la página
-         ============================================ -->
     <div class="custom-cursor" id="customCursor"></div>
-    <!-- ============================================
-         HEADER FIJO - Cambia de estilo al hacer scroll
-         ============================================ -->
-    <header class="header" id="header">
+
+    <header class="header header--on-hero" id="header">
         <div class="header-container">
-            <!-- Logo de texto -->
             <div class="logo">NEXUS</div>
-            
-            <!-- Navegación -->
-            <nav class="nav">
+            <nav class="nav" id="nav">
                 <a href="#work" class="nav-link">Work</a>
                 <a href="#about" class="nav-link">About</a>
                 <a href="#services" class="nav-link">Services</a>
                 <a href="#journal" class="nav-link">Journal</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </nav>
-            
-            <!-- Botón CTA -->
             <button class="btn-talk">Let's Talk</button>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </header>
 
-    <!-- ============================================
-         HERO SECTION - 100vh Full Screen con VIDEO
-         Inspirado en BASIC/DEPT
-         [VIDEO PATH: media/hero-visual.mp4]
-         ============================================ -->
-    <section class="hero" id="hero">
-        <!-- Video de fondo - tipo BASIC/DEPT -->
-        <div class="hero__video-wrapper">
-            <video 
-                class="hero__video" 
-                autoplay 
-                muted 
-                loop 
-                playsinline 
-                poster="media/hero-poster.jpg"
-            >
-                <!-- VIDEO PRINCIPAL (HD) -->
-                <source src="media/hero-visual.mp4" type="video/mp4">
-                Tu navegador no soporta videos HTML5.
-            </video>
-            <!-- Overlay gradient para legibilidad de texto -->
-            <div class="hero__overlay"></div>
-        </div>
-        
-        <!-- Contenido del Hero -->
-        <div class="hero__content">
-            <h1 class="hero__title">
-                Branding Digital<br>Que Inspira
-            </h1>
-            <p class="hero__subtitle">
-                Creamos productos digitales, experiencias de e‑commerce y estrategias de marca que generan valor real a tu negocio.
-            </p>
-            <div class="hero__cta">
-                <button class="btn btn--primary">Descubre Nuestro Trabajo</button>
-                <button class="btn btn--secondary">Ver Servicios</button>
+    <div class="menu-overlay" id="menuOverlay">
+        <button class="menu-close" id="menuClose">✕</button>
+        <nav class="menu-overlay-nav">
+            <a href="#work" class="menu-overlay-link">Work</a>
+            <a href="#about" class="menu-overlay-link">About</a>
+            <a href="#services" class="menu-overlay-link">Services</a>
+            <a href="#journal" class="menu-overlay-link">Journal</a>
+            <a href="#contact" class="menu-overlay-link">Contact</a>
+        </nav>
+    </div>
+
+    <section class="hero" id="hero" data-scroll>
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="assets/videos/hero-visual.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title" data-scroll data-scroll-speed="-2">Branding Digital<br>Que Inspira</h1>
+            <p class="hero-subtitle" data-scroll data-scroll-speed="-1.5">Creamos productos digitales, experiencias de e‑commerce y estrategias de marca que generan valor real a tu negocio.</p>
+            <div class="hero-cta">
+                <button class="btn-primary">Descubre Nuestro Trabajo</button>
+                <button class="btn-secondary">Ver Servicios</button>
             </div>
         </div>
     </section>
 
-    <!-- ============================================
-         FRANJA DE MARCAS / CLIENTES
-         [RETO: Scroll event - aparición suave]
-         ============================================ -->
-    <section class="brands-section">
+    <section class="brands-section" data-scroll>
         <div class="brands-container">
             <h2 class="brands-title">Trabajamos con</h2>
             <div class="brands-list">
@@ -94,29 +70,17 @@
         </div>
     </section>
 
-    <!-- ============================================
-         FEATURED ENGAGEMENTS - SLIDER DRAGGABLE
-         [RETO: Draggable elements + Hover effects]
-         ============================================ -->
-    <section class="featured-section" id="work">
+    <section class="featured-section" id="work" data-scroll>
         <div class="featured-container">
             <div class="featured-header">
                 <h2 class="section-title">Proyectos Destacados</h2>
                 <p class="section-subtitle">Selección de nuestros trabajos más recientes en branding, diseño digital y desarrollo de productos.</p>
             </div>
-            
-            <!-- Slider draggable -->
             <div class="featured-slider-wrapper">
                 <div class="featured-slider" id="featuredSlider">
-                    <!-- COMENTARIO: Estas tarjetas son arrastrables. CSS Scroll Snap está configurado. -->
-                    
                     <div class="project-card">
                         <div class="project-image">
-                            <img 
-                                src="media/carrusel_1.jpg" 
-                                alt="Identidad Visual Moderna"
-                                class="project-image-img"
-                            >
+                            <img src="assets/images/carrusel_1.jpg" alt="Proyecto 1">
                         </div>
                         <div class="project-info">
                             <h3 class="project-name">Identidad Visual Moderna</h3>
@@ -125,14 +89,9 @@
                             <p class="project-description">Rediseño completo de identidad visual con enfoque en modernidad y accesibilidad.</p>
                         </div>
                     </div>
-
                     <div class="project-card">
                         <div class="project-image">
-                            <img 
-                                src="media/carrusel_2.jpg" 
-                                alt="E-Commerce Digital"
-                                class="project-image-img"
-                            >
+                            <img src="assets/images/carrusel_2.jpg" alt="Proyecto 2">
                         </div>
                         <div class="project-info">
                             <h3 class="project-name">E‑Commerce Digital</h3>
@@ -141,14 +100,9 @@
                             <p class="project-description">Plataforma de comercio electrónico con experiencia de usuario optimizada.</p>
                         </div>
                     </div>
-
                     <div class="project-card">
                         <div class="project-image">
-                            <img 
-                                src="media/carrusel_3.jpg" 
-                                alt="Estrategia de Marca Global"
-                                class="project-image-img"
-                            >
+                            <img src="assets/images/carrusel_3.jpg" alt="Proyecto 3">
                         </div>
                         <div class="project-info">
                             <h3 class="project-name">Estrategia de Marca Global</h3>
@@ -157,14 +111,9 @@
                             <p class="project-description">Posicionamiento de marca y estrategia de comunicación para expansión internacional.</p>
                         </div>
                     </div>
-
                     <div class="project-card">
                         <div class="project-image">
-                            <img 
-                                src="media/carrusel_4.jpg" 
-                                alt="Aplicación Móvil SaaS"
-                                class="project-image-img"
-                            >
+                            <img src="assets/images/carrusel_4.jpg" alt="Proyecto 4">
                         </div>
                         <div class="project-info">
                             <h3 class="project-name">Aplicación Móvil SaaS</h3>
@@ -178,21 +127,13 @@
         </div>
     </section>
 
-    <!-- ============================================
-         ABOUT SECTION
-         [RETO: Scroll event - aparición suave]
-         ============================================ -->
-    <section class="about-section" id="about">
+    <section class="about-section" id="about" data-scroll>
         <div class="about-container">
             <h2 class="section-title">Quiénes Somos</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>
-                        En NEXUS, creemos que el diseño digital es más que estética. Es la convergencia de cultura, tecnología y estrategia de negocio. Nuestro equipo está compuesto por diseñadores, desarrolladores y estrategas apasionados por resolver problemas complejos mediante soluciones creativas e innovadoras.
-                    </p>
-                    <p>
-                        Desde la conceptualización de marca hasta la implementación de productos digitales, nos comprometemos a entregar experiencias que no solo se ven bien, sino que generan valor tangible para tus usuarios y tu negocio. Cada proyecto es una oportunidad para explorar nuevas posibilidades y establecer estándares de excelencia.
-                    </p>
+                    <p>En NEXUS, creemos que el diseño digital es más que estética. Es la convergencia de cultura, tecnología y estrategia de negocio. Nuestro equipo está compuesto por diseñadores, desarrolladores y estrategas apasionados por resolver problemas complejos mediante soluciones creativas e innovadoras.</p>
+                    <p>Desde la conceptualización de marca hasta la implementación de productos digitales, nos comprometemos a entregar experiencias que no solo se ven bien, sino que generan valor tangible para tus usuarios y tu negocio. Cada proyecto es una oportunidad para explorar nuevas posibilidades y establecer estándares de excelencia.</p>
                 </div>
                 <div class="about-values">
                     <div class="value-item">
@@ -212,11 +153,7 @@
         </div>
     </section>
 
-    <!-- ============================================
-         SERVICES SECTION
-         [RETO: Hover effects en tarjetas]
-         ============================================ -->
-    <section class="services-section" id="services">
+    <section class="services-section" id="services" data-scroll>
         <div class="services-container">
             <h2 class="section-title">Nuestros Servicios</h2>
             <div class="services-grid">
@@ -248,156 +185,116 @@
         </div>
     </section>
 
-    <!-- ============================================
-         FROM THE JOURNAL - Lista Editorial Horizontal
-         [RETO: Scroll event + Hover effects + Custom Cursor]
-         ============================================ -->
-    <section class="featured-news" id="journal">
-        <div class="featured-news__container">
-            <div class="featured-news__header">
-                <h2 class="section-title">From the Journal</h2>
-                <p class="featured-news__subtitle">Insights, trends, and stories from the digital world</p>
-            </div>
-            
-            <!-- Lista vertical de artículos -->
+    <section class="journal-section" id="journal" data-scroll>
+        <div class="journal-container">
+            <h2 class="section-title">Artículos y Tendencias</h2>
             <div class="journal-list">
-                <!-- Article 1 -->
-                <article class="journal-item journal-item--interactive">
-                    <div class="journal-item__media">
-                        <img 
-                            src="media/journal_1.jpg" 
-                            alt="El Futuro del Diseño Generativo"
-                            class="journal-item-img"
-                        >
+                <article class="journal-item">
+                    <div class="journal-item-image">
+                        <img src="assets/images/journal_1.jpg" alt="Artículo">
                     </div>
-                    <div class="journal-item__content">
-                        <span class="journal-item__category">Announcement</span>
-                        <h3 class="journal-item__title">El Futuro del Diseño Generativo</h3>
-                        <time class="journal-item__date">21 de enero, 2026</time>
+                    <div class="journal-item-content">
+                        <span class="journal-item-category">Tendencias</span>
+                        <h3 class="journal-item-title">El Futuro del Diseño Generativo</h3>
+                        <p class="journal-item-date">21 de enero, 2026</p>
                     </div>
-                    <a href="#" class="journal-item__link">→</a>
+                    <div class="journal-item-arrow">→</div>
                 </article>
 
-                <!-- Article 2 -->
-                <article class="journal-item journal-item--interactive">
-                    <div class="journal-item__media">
-                        <img 
-                            src="media/journal_2.jpg" 
-                            alt="Estrategia Omnichannel en 2026"
-                            class="journal-item-img"
-                        >
+                <article class="journal-item">
+                    <div class="journal-item-image">
+                        <img src="assets/images/journal_2.jpg" alt="Artículo">
                     </div>
-                    <div class="journal-item__content">
-                        <span class="journal-item__category">Insight</span>
-                        <h3 class="journal-item__title">Estrategia Omnichannel en 2026</h3>
-                        <time class="journal-item__date">18 de enero, 2026</time>
+                    <div class="journal-item-content">
+                        <span class="journal-item-category">Insights</span>
+                        <h3 class="journal-item-title">Estrategia Omnichannel en 2026</h3>
+                        <p class="journal-item-date">18 de enero, 2026</p>
                     </div>
-                    <a href="#" class="journal-item__link">→</a>
+                    <div class="journal-item-arrow">→</div>
                 </article>
 
-                <!-- Article 3 -->
-                <article class="journal-item journal-item--interactive">
-                    <div class="journal-item__media">
-                        <img 
-                            src="media/journal_3.jpg" 
-                            alt="Rediseño de Identidad: Lecciones Aprendidas"
-                            class="journal-item-img"
-                        >
+                <article class="journal-item">
+                    <div class="journal-item-image">
+                        <img src="assets/images/journal_3.jpg" alt="Artículo">
                     </div>
-                    <div class="journal-item__content">
-                        <span class="journal-item__category">Case Study</span>
-                        <h3 class="journal-item__title">Rediseño de Identidad: Lecciones Aprendidas</h3>
-                        <time class="journal-item__date">15 de enero, 2026</time>
+                    <div class="journal-item-content">
+                        <span class="journal-item-category">Casos de Estudio</span>
+                        <h3 class="journal-item-title">Rediseño de Identidad: Lecciones Aprendidas</h3>
+                        <p class="journal-item-date">15 de enero, 2026</p>
                     </div>
-                    <a href="#" class="journal-item__link">→</a>
+                    <div class="journal-item-arrow">→</div>
                 </article>
 
-                <!-- Article 4 -->
-                <article class="journal-item journal-item--interactive">
-                    <div class="journal-item__media">
-                        <img 
-                            src="media/journal_4.jpg" 
-                            alt="Accesibilidad Web: Más Allá del Cumplimiento"
-                            class="journal-item-img"
-                        >
+                <article class="journal-item">
+                    <div class="journal-item-image">
+                        <img src="assets/images/journal_4.jpg" alt="Artículo">
                     </div>
-                    <div class="journal-item__content">
-                        <span class="journal-item__category">Award</span>
-                        <h3 class="journal-item__title">Accesibilidad Web: Más Allá del Cumplimiento</h3>
-                        <time class="journal-item__date">12 de enero, 2026</time>
+                    <div class="journal-item-content">
+                        <span class="journal-item-category">Desarrollo</span>
+                        <h3 class="journal-item-title">Accesibilidad Web: Más Allá del Cumplimiento</h3>
+                        <p class="journal-item-date">12 de enero, 2026</p>
                     </div>
-                    <a href="#" class="journal-item__link">→</a>
+                    <div class="journal-item-arrow">→</div>
                 </article>
 
-                <!-- Article 5 -->
-                <article class="journal-item journal-item--interactive">
-                    <div class="journal-item__media">
-                        <img 
-                            src="media/journal_5.jpg" 
-                            alt="Tendencias de UX/UI para el Próximo Año"
-                            class="journal-item-img"
-                        >
+                <article class="journal-item">
+                    <div class="journal-item-image">
+                        <img src="assets/images/journal_5.jpg" alt="Artículo">
                     </div>
-                    <div class="journal-item__content">
-                        <span class="journal-item__category">Insight</span>
-                        <h3 class="journal-item__title">Tendencias de UX/UI para el Próximo Año</h3>
-                        <time class="journal-item__date">10 de enero, 2026</time>
+                    <div class="journal-item-content">
+                        <span class="journal-item-category">Diseño</span>
+                        <h3 class="journal-item-title">Tipografía y Legibilidad Digital</h3>
+                        <p class="journal-item-date">10 de enero, 2026</p>
                     </div>
-                    <a href="#" class="journal-item__link">→</a>
+                    <div class="journal-item-arrow">→</div>
                 </article>
 
-                <!-- Article 6 -->
-                <article class="journal-item journal-item--interactive">
-                    <div class="journal-item__media">
-                        <img 
-                            src="media/journal_6.jpg" 
-                            alt="WebGL y Experiencias 3D en el Navegador"
-                            class="journal-item-img"
-                        >
+                <article class="journal-item">
+                    <div class="journal-item-image">
+                        <img src="assets/images/journal_6.jpg" alt="Artículo">
                     </div>
-                    <div class="journal-item__content">
-                        <span class="journal-item__category">Development</span>
-                        <h3 class="journal-item__title">WebGL y Experiencias 3D en el Navegador</h3>
-                        <time class="journal-item__date">8 de enero, 2026</time>
+                    <div class="journal-item-content">
+                        <span class="journal-item-category">Negocio</span>
+                        <h3 class="journal-item-title">Métricas que Importan en Diseño Digital</h3>
+                        <p class="journal-item-date">8 de enero, 2026</p>
                     </div>
-                    <a href="#" class="journal-item__link">→</a>
+                    <div class="journal-item-arrow">→</div>
                 </article>
             </div>
         </div>
     </section>
 
-    <!-- ============================================
-         FOOTER
-         ============================================ -->
-    <footer class="footer" id="contact">
+    <footer class="footer" id="contact" data-scroll>
         <div class="footer-container">
-            <div class="footer-content">
-                <div class="footer-section">
+            <div class="footer-top">
+                <div class="footer-brand">
                     <h3>NEXUS</h3>
                     <p>Agencia digital especializada en branding, diseño y productos digitales de alto impacto.</p>
                 </div>
-                <div class="footer-section">
-                    <h4>Navegación</h4>
-                    <ul>
-                        <li><a href="#work">Proyectos</a></li>
-                        <li><a href="#about">Sobre Nosotros</a></li>
-                        <li><a href="#services">Servicios</a></li>
-                        <li><a href="#journal">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contacto</h4>
-                    <p>Email: <a href="mailto:hello@nexus.com">hello@nexus.com</a></p>
-                    <p>Teléfono: <a href="tel:+123456789">+1 (234) 567-89</a></p>
-                </div>
-                <div class="footer-section">
-                    <h4>Redes Sociales</h4>
-                    <ul>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">LinkedIn</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Dribbble</a></li>
-                    </ul>
+                <div class="footer-nav">
+                    <div class="footer-column">
+                        <h4>Navegación</h4>
+                        <ul>
+                            <li><a href="#work">Proyectos</a></li>
+                            <li><a href="#about">Sobre Nosotros</a></li>
+                            <li><a href="#services">Servicios</a></li>
+                            <li><a href="#journal">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Contacto</h4>
+                        <p><a href="mailto:hello@nexus.com">hello@nexus.com</a></p>
+                        <p><a href="tel:+123456789">+1 (234) 567-89</a></p>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Redes Sociales</h4>
+                        <ul>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">LinkedIn</a></li>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Dribbble</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -406,9 +303,7 @@
         </div>
     </footer>
 
-    <!-- Locomotive Scroll JS -->
     <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4/dist/locomotive-scroll.umd.js"></script>
-    <!-- JavaScript para interactividad -->
     <script src="main.js"></script>
 </body>
 </html>
