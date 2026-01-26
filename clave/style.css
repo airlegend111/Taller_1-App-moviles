@@ -92,6 +92,18 @@ body {
 	grid-column: 2 / span 2;
 }
 
+/* Ocultar números cuando la clase numeros-ocultos está activa */
+#teclado.numeros-ocultos .tecla:not(.borrar) {
+	color: #000;
+	font-size: 0;
+}
+
+#teclado.numeros-ocultos .tecla:not(.borrar)::before {
+	content: "•";
+	font-size: 16px;
+	color: var(--key-color);
+}
+
 /* ---------- Texto de referencia / info ---------- */
 .info {
 	max-width: 200px;
