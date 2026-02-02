@@ -7,10 +7,10 @@
     top: 0;
     left: 0;
     right: 0;
-    background-color: rgba($color-white, 0.95);
-    backdrop-filter: blur(10px);
+    background-color: transparent;
+    backdrop-filter: none;
     z-index: 1000;
-    border-bottom: 1px solid rgba($color-dark, 0.1);
+    border-bottom: none;
     @include transition;
 
     .container {
@@ -51,4 +51,5 @@
 .header--scrolled {
     background-color: rgba($color-white, 0.98);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(10px);
 }
